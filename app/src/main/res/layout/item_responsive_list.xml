@@ -17,6 +17,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_height="wrap_content"
         android:onClick="@{()->clickListener.onClick(model.id)}">
 

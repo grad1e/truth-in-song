@@ -7,6 +7,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -29,6 +30,7 @@ class SongFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding = FragmentSongBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
+
 
         val id = SongFragmentArgs.fromBundle(requireArguments()).id
         val viewModel = ViewModelProvider(this, SongFragmentViewModelFactory(id, Application())).get(SongFragmentViewModel::class.java)
@@ -72,6 +74,9 @@ class SongFragment : Fragment() {
                 else -> return@setOnMenuItemClickListener false
             }
         }
+
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
         return binding.root
     }
