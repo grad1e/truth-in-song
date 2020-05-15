@@ -96,20 +96,20 @@ class SplashActivityViewModel(application: Application) : AndroidViewModel(appli
     private fun checkDbData(application: Application) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                if (repository.getDbRows() == 1624) {
+                SongDatabase.getDatabase(application).clearAllTables()
+                /*if (repository.getDbRows() == 1624) {
                     delay(1000)
                     _isDbPresent.postValue(true)
                     Timber.d("Database present")
                 } else {
-                    SongDatabase.getDatabase(application).clearAllTables()
-                    Timber.d("Database cleared")
-                    insertTopics(application.resources)
-                    insertEnglish(application.resources)
-                    insertScriptural(application.resources)
-                    insertMalayalam(application.resources)
-                    delay(1000)
-                    onDbPopulateFinished()
-                }
+                    Timber.d("Database cleared")*/
+                insertTopics(application.resources)
+                insertEnglish(application.resources)
+                insertScriptural(application.resources)
+                insertMalayalam(application.resources)
+                delay(1000)
+                onDbPopulateFinished()
+                //}
             }
         }
     }

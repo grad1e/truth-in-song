@@ -37,6 +37,7 @@ class MalayalamListFragment : Fragment() {
         })
         binding.rvMalayalamList.adapter = adapter
         binding.rvMalayalamList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+        binding.rvMalayalamList.setHasFixedSize(true)
 
         viewModel.malayalamList.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)

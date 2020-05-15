@@ -11,13 +11,6 @@ class SongFragmentViewModel(id: String, application: Application) : AndroidViewM
     private val songBookDao = SongDatabase.getDatabase(application).songBookDao
     private val repository = Repository(songBookDao)
 
-
-    val song: LiveData<Song>
-
-    init {
-        song = repository.getSong(id)
-
-    }
-
+    val song= repository.getSong(id)
 
 }

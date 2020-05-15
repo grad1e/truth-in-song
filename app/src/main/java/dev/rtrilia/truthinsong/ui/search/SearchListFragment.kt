@@ -2,8 +2,6 @@ package dev.rtrilia.truthinsong.ui.search
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,18 +29,6 @@ class SearchListFragment() : DialogFragment() {
                 InputMethodManager.HIDE_IMPLICIT_ONLY
             )
         }
-
-        binding.tilEtSearch.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.getSearchList(s.toString())
-            }
-        })
 
         val adapter = SearchListFragmentAdapter(SearchListItemClickListener {
             navController.navigate(SearchListFragmentDirections.actionSearchFragmentToDetailFragment(it))

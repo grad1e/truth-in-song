@@ -38,6 +38,8 @@ class EnglishListFragment : Fragment() {
         })
         binding.rvEnglishList.adapter = adapter
         binding.rvEnglishList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+        binding.rvEnglishList.setHasFixedSize(true)
+
 
 
         viewModel.englishListList.observe(viewLifecycleOwner, Observer {

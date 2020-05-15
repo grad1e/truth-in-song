@@ -37,6 +37,8 @@ class ResponsiveListFragment : Fragment() {
         })
         binding.rvScripturalList.adapter = adapter
         binding.rvScripturalList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+        binding.rvScripturalList.setHasFixedSize(true)
+
 
         viewModel.responsiveListList.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)

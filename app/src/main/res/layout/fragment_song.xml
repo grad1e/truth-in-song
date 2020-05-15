@@ -46,55 +46,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_top"
-                    android:layout_width="match_parent"
+
+                <TextView
+                    android:id="@+id/song_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@{song.song_id}"
+
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/song_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/song_title"
+                    tools:text="1200" />
+
+                <TextView
+                    android:id="@+id/song_title"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    app:cardElevation="4dp"
+
+                    android:text="@{song.mal_title??song.eng_title}"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintStart_toEndOf="@+id/song_number"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@tools:sample/full_names" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/song_number"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:text="@{song.song_id}"
-                            android:textSize="18sp"
-                            app:layout_constraintBottom_toBottomOf="@+id/song_title"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/song_title"
-                            tools:text="1200" />
-
-                        <TextView
-                            android:id="@+id/song_title"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="16dp"
-                            android:text="@{song.mal_title??song.eng_title}"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/song_number"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="@tools:sample/full_names" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_bottom"
@@ -107,7 +88,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/card_top">
+                    app:layout_constraintTop_toBottomOf="@+id/song_title">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"

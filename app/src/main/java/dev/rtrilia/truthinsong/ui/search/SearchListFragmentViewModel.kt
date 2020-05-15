@@ -12,13 +12,9 @@ class SearchListFragmentViewModel(application: Application) : AndroidViewModel(a
     private val songBookDao = SongDatabase.getDatabase(application).songBookDao
     private val repository = Repository(songBookDao)
 
-    private val _searchString = MutableLiveData<String>()
-    val searchList = Transformations.switchMap(_searchString) {
-        repository.getSearchList(it,it,"%$it%")
-    }
-
-    fun getSearchList(searchString: String) {
-        _searchString.value = searchString
+    var searchString = MutableLiveData<String>()
+    val searchList = Transformations.switchMap(searchString) {
+        repository.getSearchList(it, it, "%$it%")
     }
 
 

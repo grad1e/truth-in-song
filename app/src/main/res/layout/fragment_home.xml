@@ -25,7 +25,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+                app:title="Truth in Song" />
 
 
         </com.google.android.material.appbar.AppBarLayout>

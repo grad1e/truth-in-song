@@ -30,7 +30,7 @@ interface SongBookDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertResponsive(responsiveEntity: List<ResponsiveEntity>)
 
-    @Query("SELECT (SELECT COUNT(*) FROM malayalamentity) + (SELECT COUNT(*) FROM englishentity)+ (SELECT COUNT(*) FROM responsiveentity) +(SELECT COUNT(*) FROM topicentity)")
+    @Query("SELECT (SELECT COUNT(*) FROM MalayalamEntity) + (SELECT COUNT(*) FROM EnglishEntity)+ (SELECT COUNT(*) FROM ResponsiveEntity) +(SELECT COUNT(*) FROM TopicEntity)")
     suspend fun getDbRows(): Int
 
     @Query("SELECT id,eng_title,song_id FROM englishentity")
