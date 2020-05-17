@@ -4,10 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import dev.rtrilia.truthinsong.database.entities.EnglishEntity
 import dev.rtrilia.truthinsong.database.entities.MalayalamEntity
 import dev.rtrilia.truthinsong.database.entities.ResponsiveEntity
 import dev.rtrilia.truthinsong.database.entities.TopicEntity
+import dev.rtrilia.truthinsong.util.SongUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 @Database(
     entities = [MalayalamEntity::class, EnglishEntity::class, ResponsiveEntity::class, TopicEntity::class],
@@ -32,6 +38,22 @@ abstract class SongDatabase : RoomDatabase() {
                     SongDatabase::class.java,
                     "song_database"
                 )
+                    .addCallback(object : Callback(), CoroutineScope {
+                        override val coroutineContext: CoroutineContext
+                            get() = Dispatchers.IO
+
+                        override fun onCreate(db: SupportSQLiteDatabase) {
+                            super.onCreate(db)
+                            INSTANCE?.let { database ->
+                                launch {
+                                    database.songBookDao.insertTopic(SongUtil.getTopicsJson(context.resources))
+                                    database.songBookDao.insertEnglish(SongUtil.getEnglishJson(context.resources))
+                                    database.songBookDao.insertMalayalam(SongUtil.getMalayalamJson(context.resources))
+                                    database.songBookDao.insertResponsive(SongUtil.getScripturalJson(context.resources))
+                                }
+                            }
+                        }
+                    })
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
@@ -39,4 +61,5 @@ abstract class SongDatabase : RoomDatabase() {
             }
         }
     }
+
 }

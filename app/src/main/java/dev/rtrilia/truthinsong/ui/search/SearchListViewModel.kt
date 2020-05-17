@@ -4,18 +4,18 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import dev.rtrilia.truthinsong.database.SongDatabase
 import dev.rtrilia.truthinsong.repository.Repository
 
-class SearchListFragmentViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val songBookDao = SongDatabase.getDatabase(application).songBookDao
-    private val repository = Repository(songBookDao)
+class SearchListViewModel(private val repository: Repository) : ViewModel() {
 
     var searchString = MutableLiveData<String>()
-    val searchList = Transformations.switchMap(searchString) {
-        repository.getSearchList(it, it, "%$it%")
-    }
+
+    fun getSearchList() =
+        Transformations.switchMap(searchString) {
+            repository.getSearchList(it, it, "%$it%")
+        }
 
 
 }

@@ -31,7 +31,7 @@ interface SongBookDao {
     suspend fun insertResponsive(responsiveEntity: List<ResponsiveEntity>)
 
     @Query("SELECT (SELECT COUNT(*) FROM MalayalamEntity) + (SELECT COUNT(*) FROM EnglishEntity)+ (SELECT COUNT(*) FROM ResponsiveEntity) +(SELECT COUNT(*) FROM TopicEntity)")
-    suspend fun getDbRows(): Int
+    fun getDbRows(): LiveData<Int>
 
     @Query("SELECT id,eng_title,song_id FROM englishentity")
     fun getEnglishList(): DataSource.Factory<Int, EnglishList>

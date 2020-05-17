@@ -2,9 +2,10 @@ package dev.rtrilia.truthinsong.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import dev.rtrilia.truthinsong.SongApplication
 import dev.rtrilia.truthinsong.databinding.ActivitySplashBinding
 import dev.rtrilia.truthinsong.ui.home.HomeActivity
 import kotlinx.coroutines.delay
@@ -16,11 +17,12 @@ class SplashActivity : AppCompatActivity() {
         val binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val viewModel = ViewModelProvider(this).get(SplashActivityViewModel::class.java)
+        val repository = (application as SongApplication).getRepository()
+        val viewModel: SplashActivityViewModel by viewModels { SplashActivityViewModelFactory(repository) }
         binding.lifecycleOwner = this
 
-        viewModel.isDbPresent.observe(this, Observer {
-            if (it) {
+        viewModel.getDbRows().observe(this, Observer {
+            if (it == 1624) {
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -29,3 +31,5 @@ class SplashActivity : AppCompatActivity() {
 
     }
 }
+
+

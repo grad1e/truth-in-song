@@ -1,39 +1,35 @@
 package dev.rtrilia.truthinsong.ui.song
 
-import android.app.Application
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import dev.rtrilia.truthinsong.R
+import dev.rtrilia.truthinsong.SongApplication
 import dev.rtrilia.truthinsong.databinding.FragmentSongBinding
 
 /**
  * A simple [Fragment] subclass.
  */
-class SongFragment : Fragment() {
+class SongFragment : Fragment(R.layout.fragment_song) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val binding = FragmentSongBinding.inflate(inflater)
-        binding.lifecycleOwner = viewLifecycleOwner
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-
+        val binding = FragmentSongBinding.bind(view)
         val id = SongFragmentArgs.fromBundle(requireArguments()).id
-        val viewModel = ViewModelProvider(this, SongFragmentViewModelFactory(id, Application())).get(SongFragmentViewModel::class.java)
+        val repository = (activity?.application as SongApplication).getRepository()
+        val viewModel: SongViewModel by viewModels({ this }, { SongViewModelFactory(id, repository) })
+
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val navController = NavHostFragment.findNavController(this)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
@@ -77,8 +73,6 @@ class SongFragment : Fragment() {
 
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-
-        return binding.root
     }
 
 

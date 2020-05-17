@@ -7,16 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
+import dev.rtrilia.truthinsong.SongApplication
 import dev.rtrilia.truthinsong.databinding.FragmentSearchListBinding
 
 class SearchListFragment() : DialogFragment() {
 
+    private lateinit var binding: FragmentSearchListBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentSearchListBinding.inflate(inflater, container, false)
-        val viewModel = ViewModelProvider(this).get(SearchListFragmentViewModel::class.java)
+        binding = FragmentSearchListBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val repository = (activity?.application as SongApplication).getRepository()
+        val viewModel: SearchListViewModel by viewModels({ this }, { SearchListViewModelFactory(repository) })
+
         val navController = NavHostFragment.findNavController(this)
 
         binding.lifecycleOwner = viewLifecycleOwner
@@ -30,18 +41,21 @@ class SearchListFragment() : DialogFragment() {
             )
         }
 
-        val adapter = SearchListFragmentAdapter(SearchListItemClickListener {
+        val adapter = SearchListAdapter(SearchListItemClickListener {
             navController.navigate(SearchListFragmentDirections.actionSearchFragmentToDetailFragment(it))
         })
 
         binding.recyclerView.adapter = adapter
 
-        viewModel.searchList.observe(viewLifecycleOwner, Observer {
-            adapter.setListData(it)
+        viewModel.getSearchList().observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.setListData(it)
+            }
         })
 
-        return binding.root
+
     }
+
 
     override fun onStart() {
         super.onStart()

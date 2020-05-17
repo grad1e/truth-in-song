@@ -8,19 +8,18 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import dev.rtrilia.truthinsong.R
 import dev.rtrilia.truthinsong.databinding.FragmentHomeBinding
 
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val binding = FragmentHomeBinding.inflate(inflater)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val binding = FragmentHomeBinding.bind(view)
+
         val navController = NavHostFragment.findNavController(this)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         NavigationUI.setupWithNavController(binding.toolbar, navController, appBarConfiguration)
@@ -41,9 +40,9 @@ class HomeFragment : Fragment() {
             navController.navigate(HomeFragmentDirections.actionHomeFragmentToSearchFragment())
         }
 
-
-        return binding.root
     }
+
+
 
 
 }

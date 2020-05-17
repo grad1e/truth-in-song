@@ -93,5 +93,7 @@ dependencies {
     //LeakCanary
     //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
 
+    //Fragment KTX
+    implementation "androidx.fragment:fragment-ktx:1.2.4"
 
 }

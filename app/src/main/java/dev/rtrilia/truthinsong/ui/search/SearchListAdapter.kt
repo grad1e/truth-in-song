@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.rtrilia.truthinsong.databinding.ItemFragmentSearchBinding
 import dev.rtrilia.truthinsong.models.Song
 
-class SearchListFragmentAdapter(private val clickListener: SearchListItemClickListener) : RecyclerView.Adapter<SearchListFragmentAdapter.ViewHolder>() {
+class SearchListAdapter(private val clickListener: SearchListItemClickListener) : RecyclerView.Adapter<SearchListAdapter.ViewHolder>() {
 
     private val searchList = arrayListOf<Song>()
 

@@ -3,10 +3,6 @@ package dev.rtrilia.truthinsong.repository
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import dev.rtrilia.truthinsong.database.SongBookDao
-import dev.rtrilia.truthinsong.database.entities.EnglishEntity
-import dev.rtrilia.truthinsong.database.entities.MalayalamEntity
-import dev.rtrilia.truthinsong.database.entities.ResponsiveEntity
-import dev.rtrilia.truthinsong.database.entities.TopicEntity
 import dev.rtrilia.truthinsong.models.EnglishList
 import dev.rtrilia.truthinsong.models.MalayalamList
 import dev.rtrilia.truthinsong.models.ResponsiveList
@@ -15,23 +11,7 @@ import dev.rtrilia.truthinsong.models.Song
 
 class Repository(private val songBookDao: SongBookDao) {
 
-    suspend fun insertMalayalam(malayalamEntity: List<MalayalamEntity>) {
-        songBookDao.insertMalayalam(malayalamEntity)
-    }
-
-    suspend fun insertEnglish(englishEntity: List<EnglishEntity>) {
-        songBookDao.insertEnglish(englishEntity)
-    }
-
-    suspend fun insertResponsive(responsiveEntity: List<ResponsiveEntity>) {
-        songBookDao.insertResponsive(responsiveEntity)
-    }
-
-    suspend fun insertTopic(topicEntity: List<TopicEntity>) {
-        songBookDao.insertTopic(topicEntity)
-    }
-
-    suspend fun getDbRows(): Int {
+    fun getDbRows(): LiveData<Int> {
         return songBookDao.getDbRows()
     }
 

@@ -1,33 +1,31 @@
 package dev.rtrilia.truthinsong.ui.malayalam
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import dev.rtrilia.truthinsong.R
+import dev.rtrilia.truthinsong.SongApplication
 import dev.rtrilia.truthinsong.databinding.FragmentMalayalamListBinding
 
 /**
  * A simple [Fragment] subclass.
  */
-class MalayalamListFragment : Fragment() {
+class MalayalamListFragment : Fragment(R.layout.fragment_malayalam_list) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val binding = FragmentMalayalamListBinding.inflate(inflater)
-        binding.lifecycleOwner = viewLifecycleOwner
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val viewModel = ViewModelProvider(this).get(MalayalamListFragmentViewModel::class.java)
+        val binding = FragmentMalayalamListBinding.bind(view)
+        val repository = (activity?.application as SongApplication).getRepository()
+        val viewModel: MalayalamListViewModel by viewModels({ this }, { MalayalamListViewModelFactory(repository) })
+
         val navController = NavHostFragment.findNavController(this)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         NavigationUI.setupWithNavController(binding.toolbar, navController, appBarConfiguration)
@@ -39,13 +37,8 @@ class MalayalamListFragment : Fragment() {
         binding.rvMalayalamList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
         binding.rvMalayalamList.setHasFixedSize(true)
 
-        viewModel.malayalamList.observe(viewLifecycleOwner, Observer {
+        viewModel.getMalayalamList().observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
-
-
-        return binding.root
-
     }
-
 }
