@@ -18,10 +18,6 @@ import dev.rtrilia.truthinsong.databinding.FragmentResponsiveListBinding
  */
 class ResponsiveListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ResponsiveListFragment()
-    }
-
     private lateinit var binding: FragmentResponsiveListBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

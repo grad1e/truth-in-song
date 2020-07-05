@@ -22,10 +22,6 @@ import dev.rtrilia.truthinsong.ui.malayalam.MalayalamListViewModelFactory
  */
 class EnglishListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = EnglishListFragment()
-    }
-
     private lateinit var binding: FragmentEnglishListBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

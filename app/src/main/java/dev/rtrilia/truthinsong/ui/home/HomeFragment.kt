@@ -17,7 +17,6 @@ import dev.rtrilia.truthinsong.ui.responsive.ResponsiveListFragment
 class HomeFragment : Fragment() {
 
     companion object {
-        fun newInstance() = HomeFragment()
 
         private val viewPagerFragmentList = listOf(
             MalayalamListFragment(),

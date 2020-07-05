@@ -19,10 +19,6 @@ import dev.rtrilia.truthinsong.ui.home.HomeFragment
  */
 class MalayalamListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MalayalamListFragment()
-    }
-
     private lateinit var binding: FragmentMalayalamListBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
