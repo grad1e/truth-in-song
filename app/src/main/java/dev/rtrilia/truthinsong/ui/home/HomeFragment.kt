@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dev.rtrilia.truthinsong.databinding.HomeFragmentBinding
@@ -34,7 +33,6 @@ class HomeFragment : Fragment() {
 
     }
 
-    private lateinit var viewModel: HomeViewModel
     private lateinit var binding: HomeFragmentBinding
 
     override fun onCreateView(
@@ -42,7 +40,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = HomeFragmentBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         return binding.root
     }
 
