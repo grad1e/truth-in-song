@@ -5,13 +5,12 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
 import dev.rtrilia.truthinsong.databinding.ItemMalayalamListBinding
 import dev.rtrilia.truthinsong.models.MalayalamList
 
 
 class MalayalamListAdapter(private val clickClickListener: MalayalamListItemClickListener) :
-    PagedListAdapter<MalayalamList, MalayalamListAdapter.ViewHolder>(MalayalamListDiffCallback), RecyclerViewFastScroller.OnPopupTextUpdate {
+    PagedListAdapter<MalayalamList, MalayalamListAdapter.ViewHolder>(MalayalamListDiffCallback) {
 
     companion object MalayalamListDiffCallback : DiffUtil.ItemCallback<MalayalamList>() {
         override fun areItemsTheSame(oldItem: MalayalamList, newItem: MalayalamList): Boolean {
@@ -33,10 +32,6 @@ class MalayalamListAdapter(private val clickClickListener: MalayalamListItemClic
         val listItem = getItem(position)
         holder.binding.model = listItem
         holder.binding.clickListener = clickClickListener
-    }
-
-    override fun onChange(position: Int): CharSequence {
-        return getItem(position)?.song_id.toString()
     }
 
 }

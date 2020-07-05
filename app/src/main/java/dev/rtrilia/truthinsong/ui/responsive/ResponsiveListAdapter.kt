@@ -5,12 +5,11 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
 import dev.rtrilia.truthinsong.databinding.ItemResponsiveListBinding
 import dev.rtrilia.truthinsong.models.ResponsiveList
 
 class ResponsiveListAdapter(private val clickListener: ResponsiveListItemListener) :
-    PagedListAdapter<ResponsiveList, ResponsiveListAdapter.ViewHolder>(ResponsiveListDiffCallback), RecyclerViewFastScroller.OnPopupTextUpdate {
+    PagedListAdapter<ResponsiveList, ResponsiveListAdapter.ViewHolder>(ResponsiveListDiffCallback) {
 
     companion object ResponsiveListDiffCallback : DiffUtil.ItemCallback<ResponsiveList>() {
         override fun areItemsTheSame(oldItem: ResponsiveList, newItem: ResponsiveList): Boolean {
@@ -32,10 +31,6 @@ class ResponsiveListAdapter(private val clickListener: ResponsiveListItemListene
         val listItem = getItem(position)
         holder.binding.model = listItem
         holder.binding.clickListener = clickListener
-    }
-
-    override fun onChange(position: Int): CharSequence {
-        return getItem(position)?.song_id.toString()
     }
 
 }

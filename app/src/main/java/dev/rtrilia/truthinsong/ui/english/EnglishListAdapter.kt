@@ -5,12 +5,11 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
 import dev.rtrilia.truthinsong.databinding.ItemEnglishListBinding
 import dev.rtrilia.truthinsong.models.EnglishList
 
 class EnglishListAdapter(private val clickItemListener: EnglishListItemListener) :
-    PagedListAdapter<EnglishList, EnglishListAdapter.ViewHolder>(EnglishListDiffCallback), RecyclerViewFastScroller.OnPopupTextUpdate {
+    PagedListAdapter<EnglishList, EnglishListAdapter.ViewHolder>(EnglishListDiffCallback) {
 
     companion object EnglishListDiffCallback : DiffUtil.ItemCallback<EnglishList>() {
         override fun areItemsTheSame(oldItem: EnglishList, newItem: EnglishList): Boolean {
@@ -34,10 +33,6 @@ class EnglishListAdapter(private val clickItemListener: EnglishListItemListener)
         val listItem = getItem(position)
         holder.binding.model = listItem
         holder.binding.clickListener = clickItemListener
-    }
-
-    override fun onChange(position: Int): CharSequence {
-        return getItem(position)?.song_id.toString()
     }
 
 }
