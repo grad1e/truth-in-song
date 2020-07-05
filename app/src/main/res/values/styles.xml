@@ -3,17 +3,17 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorOnPrimary">@color/primaryTextColor</item>
 
-        <item name="colorSecondary">@color/secondaryColor</item>
-        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+        <item name="colorSecondary">@color/primaryColor</item>
+        <item name="colorSecondaryVariant">@color/primaryDarkColor</item>
+        <item name="colorOnSecondary">@color/primaryTextColor</item>
 
         <item name="colorSurface">@color/surfaceColor</item>
+        <item name="colorOnSurface">@color/surfaceTextColor</item>
+        <item name="android:colorBackground">@color/backgroundColor</item>
 
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
     </style>
 
     <style name="FastScrollPopUp" parent="TextAppearance.MaterialComponents.Body1">

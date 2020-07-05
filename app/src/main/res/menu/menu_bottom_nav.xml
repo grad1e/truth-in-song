@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/malayalamListFragment"
+        android:icon="@drawable/ic_violin"
+        android:orderInCategory="1"
+        android:title="Malayalam" />
+    <item
+        android:id="@+id/englishListFragment"
+        android:icon="@drawable/ic_grand_piano"
+        android:orderInCategory="2"
+        android:title="English" />
+    <item
+        android:id="@+id/responsiveListFragment"
+        android:icon="@drawable/ic_bible"
+        android:orderInCategory="2"
+        android:title="Responsive" />
+</menu>

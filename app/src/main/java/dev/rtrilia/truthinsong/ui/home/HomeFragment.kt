@@ -5,44 +5,67 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
-import dev.rtrilia.truthinsong.R
-import dev.rtrilia.truthinsong.databinding.FragmentHomeBinding
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
+import dev.rtrilia.truthinsong.databinding.HomeFragmentBinding
+import dev.rtrilia.truthinsong.ui.english.EnglishListFragment
+import dev.rtrilia.truthinsong.ui.malayalam.MalayalamListFragment
+import dev.rtrilia.truthinsong.ui.responsive.ResponsiveListFragment
 
-/**
- * A simple [Fragment] subclass.
- */
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentHomeBinding.bind(view)
+    companion object {
+        fun newInstance() = HomeFragment()
 
-        val navController = NavHostFragment.findNavController(this)
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
-        NavigationUI.setupWithNavController(binding.toolbar, navController, appBarConfiguration)
+        private val viewPagerFragmentList = listOf(
+            MalayalamListFragment(),
+            EnglishListFragment(),
+            ResponsiveListFragment()
+        )
 
-        binding.cardEnglish.setOnClickListener {
-            navController.navigate(HomeFragmentDirections.actionHomeFragmentToEnglishListFragment())
-        }
-
-        binding.cardMalayalam.setOnClickListener {
-            navController.navigate(HomeFragmentDirections.actionHomeFragmentToMalayalamListFragment())
-        }
-
-        binding.cardScriptural.setOnClickListener {
-            navController.navigate(HomeFragmentDirections.actionHomeFragmentToScripturalListFragment())
-        }
-
-        binding.fabSearch.setOnClickListener {
-            navController.navigate(HomeFragmentDirections.actionHomeFragmentToSearchFragment())
-        }
+        private val viewPagerFragmentLabel = listOf(
+            "Malayalam",
+            "English",
+            "Responsive"
+        )
 
     }
 
+    private lateinit var viewModel: HomeViewModel
+    private lateinit var binding: HomeFragmentBinding
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = HomeFragmentBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupViewPager()
+        (activity as HomeActivity).setToolbarTitle("Truth in Song")
+    }
+
+    private fun setupViewPager() {
+        binding.homeViewpager.adapter = HomeFragmentViewPagerAdapter(childFragmentManager, lifecycle)
+
+        TabLayoutMediator(binding.homeTabLayout, binding.homeViewpager) { tab, position ->
+            tab.text = viewPagerFragmentLabel[position]
+        }.attach()
+    }
+
+    inner class HomeFragmentViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+        FragmentStateAdapter(fragmentManager, lifecycle) {
+        override fun getItemCount(): Int = viewPagerFragmentList.size
+
+        override fun createFragment(position: Int): Fragment = viewPagerFragmentList[position]
+    }
 
 
 }

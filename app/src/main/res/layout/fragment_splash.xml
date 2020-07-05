@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="dev.rtrilia.truthinsong.ui.splash.SplashActivity">
+        tools:context="dev.rtrilia.truthinsong.ui.splash.SplashFragment">
 
         <ImageView
             android:id="@+id/imageView"
@@ -21,9 +21,9 @@
             app:layout_constraintVertical_bias="0.30"
             app:srcCompat="@drawable/logo" />
 
-        <ProgressBar
+        <com.google.android.material.progressindicator.ProgressIndicator
             android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyle"
+            style="@style/Widget.MaterialComponents.ProgressIndicator.Circular.Indeterminate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"

@@ -13,12 +13,13 @@ import androidx.navigation.fragment.NavHostFragment
 import dev.rtrilia.truthinsong.SongApplication
 import dev.rtrilia.truthinsong.databinding.FragmentSearchListBinding
 
-class SearchListFragment() : DialogFragment() {
+class SearchListFragment : DialogFragment() {
 
     private lateinit var binding: FragmentSearchListBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentSearchListBinding.inflate(inflater)
+        binding = FragmentSearchListBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -30,7 +31,6 @@ class SearchListFragment() : DialogFragment() {
 
         val navController = NavHostFragment.findNavController(this)
 
-        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         binding.tilSearch.requestFocus()
@@ -52,8 +52,6 @@ class SearchListFragment() : DialogFragment() {
                 adapter.setListData(it)
             }
         })
-
-
     }
 
 

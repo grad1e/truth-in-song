@@ -7,8 +7,8 @@
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
         <item name="colorOnPrimary">@color/primaryTextColor</item>
 
-        <item name="colorSecondary">@color/secondaryColor</item>
-        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+        <item name="colorSurface">@color/surfaceColorNight</item>
+        <item name="colorOnSurface">@color/surfaceTextColorNight</item>
 
     </style>
 

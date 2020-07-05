@@ -1,14 +1,15 @@
 package dev.rtrilia.truthinsong.database.entities
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.squareup.moshi.JsonClass
 
 @Entity
+@JsonClass(generateAdapter = true)
 data class ResponsiveEntity(
-    val content: String?,
-    @ColumnInfo(name = "eng_title") val engTitle: String?,
+    val content: String,
+    val eng_title: String,
     @PrimaryKey val id: String,
-    @ColumnInfo(name = "mal_title") val malTitle: String?,
-    @ColumnInfo(name = "song_id") val songId: String?
+    val mal_title: String,
+    val song_id: String
 )

@@ -18,7 +18,6 @@ class SearchListAdapter(private val clickListener: SearchListItemClickListener) 
 
     class ViewHolder(val binding: ItemFragmentSearchBinding) : RecyclerView.ViewHolder(binding.root)
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemFragmentSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }

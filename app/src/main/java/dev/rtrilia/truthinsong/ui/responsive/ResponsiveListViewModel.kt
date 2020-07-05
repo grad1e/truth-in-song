@@ -5,5 +5,8 @@ import androidx.paging.toLiveData
 import dev.rtrilia.truthinsong.repository.Repository
 
 class ResponsiveListViewModel(private val repository: Repository) : ViewModel() {
-    fun getResponsiveList() = repository.getResponsiveList().toLiveData(pageSize = 50)
+
+    fun getResponsiveList() =
+        repository.getResponsiveList().toLiveData(pageSize = 50)
+
 }

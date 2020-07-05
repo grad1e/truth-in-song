@@ -21,12 +21,10 @@ class MalayalamListAdapter(private val clickClickListener: MalayalamListItemClic
         override fun areContentsTheSame(oldItem: MalayalamList, newItem: MalayalamList): Boolean {
             return oldItem == newItem
         }
-
     }
 
     class ViewHolder(val binding: ItemMalayalamListBinding) : RecyclerView.ViewHolder(binding.root)
-
-
+    
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemMalayalamListBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }

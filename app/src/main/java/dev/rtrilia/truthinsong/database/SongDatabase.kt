@@ -9,7 +9,7 @@ import dev.rtrilia.truthinsong.database.entities.EnglishEntity
 import dev.rtrilia.truthinsong.database.entities.MalayalamEntity
 import dev.rtrilia.truthinsong.database.entities.ResponsiveEntity
 import dev.rtrilia.truthinsong.database.entities.TopicEntity
-import dev.rtrilia.truthinsong.util.SongUtil
+import dev.rtrilia.truthinsong.util.SongDatabaseUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,11 +45,11 @@ abstract class SongDatabase : RoomDatabase() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
                             INSTANCE?.let { database ->
-                                launch {
-                                    database.songBookDao.insertTopic(SongUtil.getTopicsJson(context.resources))
-                                    database.songBookDao.insertEnglish(SongUtil.getEnglishJson(context.resources))
-                                    database.songBookDao.insertMalayalam(SongUtil.getMalayalamJson(context.resources))
-                                    database.songBookDao.insertResponsive(SongUtil.getScripturalJson(context.resources))
+                                launch(coroutineContext) {
+                                    database.songBookDao.insertTopic(SongDatabaseUtil.getTopicsJson(context.resources))
+                                    database.songBookDao.insertEnglish(SongDatabaseUtil.getEnglishJson(context.resources))
+                                    database.songBookDao.insertMalayalam(SongDatabaseUtil.getMalayalamJson(context.resources))
+                                    database.songBookDao.insertResponsive(SongDatabaseUtil.getScripturalJson(context.resources))
                                 }
                             }
                         }

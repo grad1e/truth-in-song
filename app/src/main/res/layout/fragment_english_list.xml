@@ -7,49 +7,13 @@
 
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_english_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_english_list" />
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:title="English Songs" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-
-        <com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
-            android:id="@+id/english_list_fast_scroller"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:handleDrawable="@drawable/fastscroll_handle"
-            app:handleHeight="32dp"
-            app:handleWidth="16dp"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            app:popupDrawable="@drawable/fastscroll_popup"
-            app:popupTextStyle="@style/FastScrollPopUp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_english_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/item_english_list" />
-
-        </com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -5,5 +5,8 @@ import androidx.paging.toLiveData
 import dev.rtrilia.truthinsong.repository.Repository
 
 class EnglishListViewModel(private val repository: Repository) : ViewModel() {
-    fun getEnglishList() = repository.getEnglishList().toLiveData(pageSize = 50)
+
+    fun getEnglishList() =
+        repository.getEnglishList().toLiveData(pageSize = 50)
+
 }

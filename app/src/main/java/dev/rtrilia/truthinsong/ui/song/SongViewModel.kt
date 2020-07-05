@@ -3,6 +3,6 @@ package dev.rtrilia.truthinsong.ui.song
 import androidx.lifecycle.ViewModel
 import dev.rtrilia.truthinsong.repository.Repository
 
-class SongViewModel(id: String, repository: Repository) : ViewModel() {
-    val song = repository.getSong(id)
+class SongViewModel(val id: String, val repository: Repository) : ViewModel() {
+    fun getSong() = repository.getSong(id)
 }

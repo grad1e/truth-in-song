@@ -1,24 +1,26 @@
 package dev.rtrilia.truthinsong.util
 
 import android.content.res.Resources
-import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import dev.rtrilia.truthinsong.R
 import dev.rtrilia.truthinsong.database.entities.EnglishEntity
 import dev.rtrilia.truthinsong.database.entities.MalayalamEntity
 import dev.rtrilia.truthinsong.database.entities.ResponsiveEntity
 import dev.rtrilia.truthinsong.database.entities.TopicEntity
-import dev.rtrilia.truthinsong.models.toDatabase.*
+import dev.rtrilia.truthinsong.models.toDatabase.EnglishJson
+import dev.rtrilia.truthinsong.models.toDatabase.MalayalamJson
+import dev.rtrilia.truthinsong.models.toDatabase.ResponsiveJson
+import dev.rtrilia.truthinsong.models.toDatabase.TopicsJson
 import timber.log.Timber
 
-object SongUtil {
+object SongDatabaseUtil {
 
     fun getTopicsJson(resources: Resources): List<TopicEntity> {
         val jsonString = resources.openRawResource(R.raw.topics).bufferedReader().use {
             it.readText()
         }
         val moshi = Moshi.Builder().build()
-        val adapter = moshi.adapter(Topics::class.java)
+        val adapter = moshi.adapter(TopicsJson.TopicsJsonResponse::class.java)
         val topicObject = adapter.fromJson(jsonString)
         Timber.d("Retrieved Topics")
         return topicObject!!.asDatabaseModel()
@@ -29,7 +31,7 @@ object SongUtil {
             it.readText()
         }
         val moshi = Moshi.Builder().build()
-        val adapter: JsonAdapter<English> = moshi.adapter(English::class.java)
+        val adapter = moshi.adapter(EnglishJson.EnglishJsonResponse::class.java)
         val englishObject = adapter.fromJson(jsonString)
         Timber.d("Retrieved English")
         return englishObject!!.asDatabaseModel()
@@ -41,7 +43,7 @@ object SongUtil {
             it.readText()
         }
         val moshi = Moshi.Builder().build()
-        val adapter: JsonAdapter<Responsive> = moshi.adapter(Responsive::class.java)
+        val adapter = moshi.adapter(ResponsiveJson.ResponsiveJsonResponse::class.java)
         val scripturalObject = adapter.fromJson(jsonString)
         Timber.d("Retrieved Responsive")
         return scripturalObject!!.asDatabaseModel()
@@ -53,7 +55,7 @@ object SongUtil {
             it.readText()
         }
         val moshi = Moshi.Builder().build()
-        val adapter: JsonAdapter<Malayalam> = moshi.adapter(Malayalam::class.java)
+        val adapter = moshi.adapter(MalayalamJson.MalayalamJsonResponse::class.java)
         val malayalamObject = adapter.fromJson(jsonString)
         Timber.d("Retrieved Malayalam")
         return malayalamObject!!.asDatabaseModel()

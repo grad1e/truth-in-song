@@ -22,7 +22,6 @@ class EnglishListAdapter(private val clickItemListener: EnglishListItemListener)
         }
     }
 
-
     class ViewHolder(val binding: ItemEnglishListBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
