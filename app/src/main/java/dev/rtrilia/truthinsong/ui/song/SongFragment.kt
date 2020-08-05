@@ -35,12 +35,19 @@ class SongFragment : Fragment() {
 
         viewModel.getSong().observe(viewLifecycleOwner, Observer { song ->
             song?.let {
-                (activity as HomeActivity).setToolbarTitle(it.song_id)
-                val str = HtmlCompat.fromHtml(it.content, HtmlCompat.FROM_HTML_MODE_LEGACY)
-                binding.songContent.text = str
-                if (it.author.isBlank()) {
-                    binding.songAuthor.visibility = View.GONE
+                it.song_id?.let { song_id -> (activity as HomeActivity).setToolbarTitle(song_id) }
+
+                it.content?.let { content ->
+                    val str = HtmlCompat.fromHtml(content, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    binding.songContent.text = str
                 }
+
+                it.author?.let { author ->
+                    if (author.isBlank()) {
+                        binding.songAuthor.visibility = View.GONE
+                    }
+                }
+                
                 binding.song = it
             }
         })

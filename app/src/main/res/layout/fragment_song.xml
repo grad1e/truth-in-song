@@ -84,6 +84,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:lineSpacingExtra="8sp"
+                            android:textColor="@android:color/black"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toTopOf="@+id/song_author"
                             app:layout_constraintEnd_toEndOf="parent"
