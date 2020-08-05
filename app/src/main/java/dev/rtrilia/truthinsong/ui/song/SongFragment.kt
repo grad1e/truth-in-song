@@ -1,10 +1,8 @@
 package dev.rtrilia.truthinsong.ui.song
 
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.view.*
-import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -35,21 +33,16 @@ class SongFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        viewModel.getSong().observe(viewLifecycleOwner, Observer {
-            (activity as HomeActivity).setToolbarTitle(it.song_id.toString())
-
-            val str = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Html.fromHtml(it.content, FROM_HTML_MODE_LEGACY)
-            } else {
-                Html.fromHtml(it.content)
+        viewModel.getSong().observe(viewLifecycleOwner, Observer { song ->
+            song?.let {
+                (activity as HomeActivity).setToolbarTitle(it.song_id)
+                val str = HtmlCompat.fromHtml(it.content, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                binding.songContent.text = str
+                if (it.author.isBlank()) {
+                    binding.songAuthor.visibility = View.GONE
+                }
+                binding.song = it
             }
-            binding.songContent.text = str
-
-            if (it.author.isNullOrBlank()) {
-                binding.songAuthor.visibility = View.GONE
-            }
-
-            binding.song = it
         })
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
