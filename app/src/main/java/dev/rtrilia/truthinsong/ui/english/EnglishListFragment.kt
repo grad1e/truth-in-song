@@ -7,15 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import dev.rtrilia.truthinsong.SongApplication
 import dev.rtrilia.truthinsong.databinding.FragmentEnglishListBinding
-import dev.rtrilia.truthinsong.ui.home.HomeFragment
-import dev.rtrilia.truthinsong.ui.malayalam.MalayalamListViewModel
-import dev.rtrilia.truthinsong.ui.malayalam.MalayalamListViewModelFactory
 
 /**
  * A simple [Fragment] subclass.
@@ -23,23 +19,25 @@ import dev.rtrilia.truthinsong.ui.malayalam.MalayalamListViewModelFactory
 class EnglishListFragment : Fragment() {
 
     private lateinit var binding: FragmentEnglishListBinding
+    private lateinit var factory: EnglishListViewModelFactory
+    private val viewModel by viewModels<EnglishListViewModel>({ this }, { factory })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentEnglishListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        val repository = (activity?.application as SongApplication).getRepository()
+        factory = EnglishListViewModelFactory(repository)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+    }
 
-        val repository = (activity?.application as SongApplication).getRepository()
-        val viewModel: EnglishListViewModel by viewModels({ this }, { EnglishListViewModelFactory(repository) })
-
-        val navController = findNavController()
-
+    private fun setupRecyclerView() {
         val adapter = EnglishListAdapter(EnglishListItemListener {
-            navController.navigate(EnglishListFragmentDirections.actionGlobalDetailFragment(it))
+            findNavController().navigate(EnglishListFragmentDirections.actionGlobalDetailFragment(it))
         })
         binding.rvEnglishList.adapter = adapter
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
@@ -51,7 +49,6 @@ class EnglishListFragment : Fragment() {
                 adapter.submitList(it)
             }
         })
-
     }
 
 

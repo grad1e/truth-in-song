@@ -19,33 +19,34 @@ import dev.rtrilia.truthinsong.databinding.FragmentResponsiveListBinding
 class ResponsiveListFragment : Fragment() {
 
     private lateinit var binding: FragmentResponsiveListBinding
+    private lateinit var factory: ResponsiveListViewModelFactory
+    private val viewModel by viewModels<ResponsiveListViewModel>({ this }, { factory })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentResponsiveListBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        val repository = (activity?.application as SongApplication).getRepository()
+        factory = ResponsiveListViewModelFactory(repository)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+    }
 
-        val repository = (activity?.application as SongApplication).getRepository()
-        val viewModel: ResponsiveListViewModel by viewModels({ this }, { ResponsiveListViewModelFactory(repository) })
-
-        val navController = findNavController()
-
+    private fun setupRecyclerView() {
         val adapter = ResponsiveListAdapter(ResponsiveListItemListener {
-            navController.navigate(ResponsiveListFragmentDirections.actionGlobalDetailFragment(it))
+            findNavController().navigate(ResponsiveListFragmentDirections.actionGlobalDetailFragment(it))
         })
         binding.rvScripturalList.adapter = adapter
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.rvScripturalList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
         binding.rvScripturalList.setHasFixedSize(true)
 
-
         viewModel.getResponsiveList().observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
-
     }
 
 

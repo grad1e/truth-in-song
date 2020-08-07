@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import dev.rtrilia.truthinsong.SongApplication
 import dev.rtrilia.truthinsong.databinding.FragmentMalayalamListBinding
-import dev.rtrilia.truthinsong.ui.home.HomeFragment
 
 /**
  * A simple [Fragment] subclass.
@@ -20,23 +19,25 @@ import dev.rtrilia.truthinsong.ui.home.HomeFragment
 class MalayalamListFragment : Fragment() {
 
     private lateinit var binding: FragmentMalayalamListBinding
+    private lateinit var factory: MalayalamListViewModelFactory
+    private val viewModel by viewModels<MalayalamListViewModel>({ this }, { factory })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMalayalamListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        val repository = (activity?.application as SongApplication).getRepository()
+        factory = MalayalamListViewModelFactory(repository)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+    }
 
-        val repository = (activity?.application as SongApplication).getRepository()
-        val viewModel: MalayalamListViewModel by viewModels({ this }, { MalayalamListViewModelFactory(repository) })
-
-        val navController = findNavController()
-
+    private fun setupRecyclerView() {
         val adapter = MalayalamListAdapter(MalayalamListItemClickListener {
-            navController.navigate(MalayalamListFragmentDirections.actionGlobalDetailFragment(it))
+            findNavController().navigate(MalayalamListFragmentDirections.actionGlobalDetailFragment(it))
         })
         binding.rvMalayalamList.adapter = adapter
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
@@ -48,7 +49,5 @@ class MalayalamListFragment : Fragment() {
                 adapter.submitList(it)
             }
         })
-
-
     }
 }

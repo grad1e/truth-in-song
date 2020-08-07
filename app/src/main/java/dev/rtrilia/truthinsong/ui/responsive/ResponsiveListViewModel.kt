@@ -7,6 +7,6 @@ import dev.rtrilia.truthinsong.repository.Repository
 class ResponsiveListViewModel(private val repository: Repository) : ViewModel() {
 
     fun getResponsiveList() =
-        repository.getResponsiveList().toLiveData(pageSize = 50)
+        repository.getResponsiveList().toLiveData(pageSize = 25)
 
 }

@@ -1,6 +1,7 @@
 package dev.rtrilia.truthinsong.ui.home
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -30,6 +31,25 @@ class HomeActivity : AppCompatActivity() {
         setSupportActionBar(binding.homeToolbar)
         val appBarConfiguration = AppBarConfiguration.Builder(R.id.splashFragment, R.id.homeFragment).build()
         binding.homeToolbar.setupWithNavController(navController, appBarConfiguration)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.splashFragment -> setViewsGone()
+                R.id.homeFragment -> setViewsVisible()
+                R.id.detailFragment -> setViewsVisible()
+            }
+        }
+
+    }
+
+    private fun setViewsGone() {
+        binding.homeToolbar.visibility = View.GONE
+        binding.fabSearch.visibility = View.GONE
+    }
+
+    private fun setViewsVisible() {
+        binding.homeToolbar.visibility = View.VISIBLE
+        binding.fabSearch.visibility = View.VISIBLE
     }
 
     fun setToolbarTitle(title: String) {

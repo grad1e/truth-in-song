@@ -6,34 +6,35 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import dev.rtrilia.truthinsong.R
 import dev.rtrilia.truthinsong.SongApplication
 import dev.rtrilia.truthinsong.databinding.FragmentSongBinding
 import dev.rtrilia.truthinsong.ui.home.HomeActivity
 
-/**
- * A simple [Fragment] subclass.
- */
 class SongFragment : Fragment() {
 
     private lateinit var binding: FragmentSongBinding
+    private lateinit var factory: SongViewModelFactory
+    private val viewModel by viewModels<SongViewModel>({ this }, { factory })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSongBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        val repository = (activity?.application as SongApplication).getRepository()
+        factory = SongViewModelFactory(repository)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val id = SongFragmentArgs.fromBundle(requireArguments()).id
-        val repository = (activity?.application as SongApplication).getRepository()
-        val viewModel: SongViewModel by viewModels({ this }, { SongViewModelFactory(id, repository) })
-
         setHasOptionsMenu(true)
+        val args by navArgs<SongFragmentArgs>()
+        getSong(args.id)
+    }
 
-        viewModel.getSong().observe(viewLifecycleOwner, Observer { song ->
+    private fun getSong(id: String) {
+        viewModel.getSong(id).observe(viewLifecycleOwner, Observer { song ->
             song?.let {
                 it.song_id?.let { song_id -> (activity as HomeActivity).setToolbarTitle(song_id) }
 
@@ -47,12 +48,10 @@ class SongFragment : Fragment() {
                         binding.songAuthor.visibility = View.GONE
                     }
                 }
-                
                 binding.song = it
             }
         })
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

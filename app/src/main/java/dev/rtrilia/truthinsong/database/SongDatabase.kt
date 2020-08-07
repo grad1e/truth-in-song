@@ -17,7 +17,7 @@ import kotlin.coroutines.CoroutineContext
 
 @Database(
     entities = [MalayalamEntity::class, EnglishEntity::class, ResponsiveEntity::class, TopicEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class SongDatabase : RoomDatabase() {
@@ -42,8 +42,8 @@ abstract class SongDatabase : RoomDatabase() {
                         override val coroutineContext: CoroutineContext
                             get() = Dispatchers.IO
 
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
+                        override fun onOpen(db: SupportSQLiteDatabase) {
+                            super.onOpen(db)
                             INSTANCE?.let { database ->
                                 launch(coroutineContext) {
                                     database.songBookDao.insertTopic(SongDatabaseUtil.getTopicsJson(context.resources))
