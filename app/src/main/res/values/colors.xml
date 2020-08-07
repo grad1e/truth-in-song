@@ -15,5 +15,6 @@
 
     <color name="surfaceColorNight">#263238</color>
     <color name="surfaceTextColorNight">#ffffff</color>
+    <color name="statusBarColorNight">#000a12</color>
 
 </resources>

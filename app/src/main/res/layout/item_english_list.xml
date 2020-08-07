@@ -47,7 +47,7 @@
             android:layout_marginBottom="16dp"
             android:text="@{model.eng_title}"
             android:textSize="16sp"
-            android:textColor="@android:color/black"
+            style="@style/AppTheme.TextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_song_id"

@@ -14,12 +14,21 @@
         <item name="android:colorBackground">@color/backgroundColor</item>
 
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+
+        <item name="tabStyle">@style/AppTheme.TabLayout</item>
     </style>
 
-    <style name="FastScrollPopUp" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">#FFFFFF</item>
+
+    <style name="AppTheme.TextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
+    <style name="AppTheme.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabTextAppearance">@style/TextAppearance.App.Button</item>
+    </style>
+
+    <style name="TextAppearance.App.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>

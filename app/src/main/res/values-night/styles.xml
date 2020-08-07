@@ -7,14 +7,41 @@
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
         <item name="colorOnPrimary">@color/primaryTextColor</item>
 
-        <item name="colorSurface">@color/surfaceColorNight</item>
         <item name="colorOnSurface">@color/surfaceTextColorNight</item>
+
+        <item name="colorPrimaryDark">@color/statusBarColorNight</item>
+
+        <item name="tabStyle">@style/AppTheme.TabLayout</item>
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
 
     </style>
 
-    <style name="FastScrollPopUp" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">#FFFFFF</item>
+    <style name="AppTheme.TextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/surfaceTextColorNight</item>
+    </style>
+
+    <style name="AppTheme.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TabLayout</item>
+        <item name="tabTextAppearance">@style/TextAppearance.App.Button</item>
+    </style>
+
+    <style name="ThemeOverlay.App.TabLayout" parent="">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorSurface">@color/surfaceColorNight</item>
+        <item name="colorOnSurface">@color/surfaceTextColorNight</item>
+    </style>
+
+    <style name="TextAppearance.App.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Toolbar" parent="">
+        <item name="colorPrimary">@color/surfaceColorNight</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
     </style>
 
 
