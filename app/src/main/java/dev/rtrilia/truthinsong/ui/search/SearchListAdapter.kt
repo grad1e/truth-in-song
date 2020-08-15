@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.rtrilia.truthinsong.databinding.ItemFragmentSearchBinding
 import dev.rtrilia.truthinsong.models.Song
 
-class SearchListAdapter(private val clickListener: SearchListItemClickListener) : RecyclerView.Adapter<SearchListAdapter.ViewHolder>() {
+class SearchListAdapter(private val clickListener: (Song) -> Unit) : RecyclerView.Adapter<SearchListAdapter.ViewHolder>() {
 
     private val searchList = arrayListOf<Song>()
 
@@ -28,6 +28,8 @@ class SearchListAdapter(private val clickListener: SearchListItemClickListener) 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.model = searchList[position]
-        holder.binding.clickListener = clickListener
+        holder.binding.songLayout.setOnClickListener {
+            clickListener(searchList[position])
+        }
     }
 }

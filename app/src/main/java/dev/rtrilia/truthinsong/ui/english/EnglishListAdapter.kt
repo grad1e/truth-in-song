@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.rtrilia.truthinsong.databinding.ItemEnglishListBinding
 import dev.rtrilia.truthinsong.models.EnglishList
 
-class EnglishListAdapter(private val clickItemListener: EnglishListItemListener) :
+class EnglishListAdapter(val clickItemListener: (EnglishList) -> Unit) :
     PagedListAdapter<EnglishList, EnglishListAdapter.ViewHolder>(EnglishListDiffCallback) {
 
     companion object EnglishListDiffCallback : DiffUtil.ItemCallback<EnglishList>() {
@@ -32,7 +32,11 @@ class EnglishListAdapter(private val clickItemListener: EnglishListItemListener)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val listItem = getItem(position)
         holder.binding.model = listItem
-        holder.binding.clickListener = clickItemListener
+        holder.binding.songLayout.setOnClickListener {
+            if (listItem != null) {
+                clickItemListener(listItem)
+            }
+        }
     }
 
 }

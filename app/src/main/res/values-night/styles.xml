@@ -22,7 +22,7 @@
 
     <style name="AppTheme.TabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.TabLayout</item>
-        <item name="tabTextAppearance">@style/TextAppearance.App.Button</item>
+      <!--  <item name="tabTextAppearance">@style/TextAppearance.App.Button</item>-->
     </style>
 
     <style name="ThemeOverlay.App.TabLayout" parent="">
@@ -31,9 +31,9 @@
         <item name="colorOnSurface">@color/surfaceTextColorNight</item>
     </style>
 
-    <style name="TextAppearance.App.Button" parent="TextAppearance.MaterialComponents.Button">
+  <!--  <style name="TextAppearance.App.Button" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:textStyle">bold</item>
-    </style>
+    </style>-->
 
     <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>

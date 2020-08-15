@@ -2,7 +2,6 @@ package dev.rtrilia.truthinsong.ui.song
 
 import android.os.Bundle
 import android.view.*
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -23,6 +22,7 @@ class SongFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         val repository = (activity?.application as SongApplication).getRepository()
         factory = SongViewModelFactory(repository)
+        binding.viewModel = viewModel
         return binding.root
     }
 
@@ -30,29 +30,27 @@ class SongFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         val args by navArgs<SongFragmentArgs>()
-        getSong(args.id)
+        viewModel.getSong(args.id)
+        setSongData()
     }
 
-    private fun getSong(id: String) {
-        viewModel.getSong(id).observe(viewLifecycleOwner, Observer { song ->
-            song?.let {
-                it.song_id?.let { song_id -> (activity as HomeActivity).setToolbarTitle(song_id) }
+    private fun setSongData() {
+        viewModel.songId.observe(viewLifecycleOwner, Observer {
+            it?.let { songId ->
+                (activity as HomeActivity).setToolbarTitle(songId)
+            }
+        })
 
-                it.content?.let { content ->
-                    val str = HtmlCompat.fromHtml(content, HtmlCompat.FROM_HTML_MODE_LEGACY)
-                    binding.songContent.text = str
+        viewModel.songAuthor.observe(viewLifecycleOwner, Observer {
+            it?.let { author ->
+                if (author.isBlank()) {
+                    binding.songAuthor.visibility = View.GONE
                 }
-
-                it.author?.let { author ->
-                    if (author.isBlank()) {
-                        binding.songAuthor.visibility = View.GONE
-                    }
-                }
-                binding.song = it
             }
         })
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

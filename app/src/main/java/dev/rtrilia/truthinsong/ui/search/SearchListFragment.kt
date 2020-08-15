@@ -45,9 +45,11 @@ class SearchListFragment : DialogFragment() {
     }
 
     private fun setupRecyclerView() {
-        val adapter = SearchListAdapter(SearchListItemClickListener {
-            findNavController().navigate(SearchListFragmentDirections.actionSearchFragmentToDetailFragment(it))
-        })
+        val adapter = SearchListAdapter {
+            it.id?.let { id ->
+                findNavController().navigate(SearchListFragmentDirections.actionSearchFragmentToDetailFragment(id))
+            }
+        }
         binding.recyclerView.adapter = adapter
         viewModel.getSearchList().observe(viewLifecycleOwner, Observer {
             it?.let {

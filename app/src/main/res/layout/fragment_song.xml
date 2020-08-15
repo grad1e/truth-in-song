@@ -5,11 +5,10 @@
 
     <data>
 
-        <import type="android.view.View" />
-
         <variable
-            name="song"
-            type="dev.rtrilia.truthinsong.models.Song" />
+            name="viewModel"
+            type="dev.rtrilia.truthinsong.ui.song.SongViewModel" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -37,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="@{song.song_id}"
+                    android:text="@{viewModel.songId}"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/song_title"
                     app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +50,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@{song.mal_title??song.eng_title}"
+                    android:text="@{viewModel.songMalTitle??viewModel.songEngTitle}"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -85,6 +84,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:lineSpacingExtra="8sp"
+                            android:text="@{viewModel.songContent}"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toTopOf="@+id/song_author"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="@{song.author}"
+                            android:text="@{viewModel.songAuthor}"
                             android:textSize="12sp"
                             android:textStyle="italic"
                             app:layout_constraintBottom_toBottomOf="parent"

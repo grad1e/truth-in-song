@@ -9,17 +9,14 @@
             name="model"
             type="dev.rtrilia.truthinsong.models.ResponsiveList" />
 
-        <variable
-            name="clickListener"
-            type="dev.rtrilia.truthinsong.ui.responsive.ResponsiveListItemListener" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/song_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:onClick="@{()->clickListener.onClick(model.id)}">
+        android:background="?android:attr/selectableItemBackground">
 
         <TextView
             android:id="@+id/tv_page_id"

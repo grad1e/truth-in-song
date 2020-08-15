@@ -9,7 +9,7 @@ import dev.rtrilia.truthinsong.databinding.ItemMalayalamListBinding
 import dev.rtrilia.truthinsong.models.MalayalamList
 
 
-class MalayalamListAdapter(private val clickClickListener: MalayalamListItemClickListener) :
+class MalayalamListAdapter(val clickListener: (MalayalamList) -> Unit) :
     PagedListAdapter<MalayalamList, MalayalamListAdapter.ViewHolder>(MalayalamListDiffCallback) {
 
     companion object MalayalamListDiffCallback : DiffUtil.ItemCallback<MalayalamList>() {
@@ -23,7 +23,7 @@ class MalayalamListAdapter(private val clickClickListener: MalayalamListItemClic
     }
 
     class ViewHolder(val binding: ItemMalayalamListBinding) : RecyclerView.ViewHolder(binding.root)
-    
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemMalayalamListBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
@@ -31,7 +31,11 @@ class MalayalamListAdapter(private val clickClickListener: MalayalamListItemClic
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val listItem = getItem(position)
         holder.binding.model = listItem
-        holder.binding.clickListener = clickClickListener
+        holder.binding.songLayout.setOnClickListener {
+            if (listItem != null) {
+                clickListener(listItem)
+            }
+        }
     }
 
 }

@@ -9,9 +9,6 @@
             name="model"
             type="dev.rtrilia.truthinsong.models.Song" />
 
-        <variable
-            name="clickListener"
-            type="dev.rtrilia.truthinsong.ui.search.SearchListItemClickListener" />
 
     </data>
 
@@ -19,8 +16,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:onClick="@{()->clickListener.onClick(model.id)}">
+        android:id="@+id/song_layout"
+        android:background="?android:attr/selectableItemBackground">
 
 
         <TextView

@@ -36,9 +36,11 @@ class ResponsiveListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val adapter = ResponsiveListAdapter(ResponsiveListItemListener {
-            findNavController().navigate(ResponsiveListFragmentDirections.actionGlobalDetailFragment(it))
-        })
+        val adapter = ResponsiveListAdapter {
+            it.id?.let { id ->
+                findNavController().navigate(ResponsiveListFragmentDirections.actionGlobalDetailFragment(id))
+            }
+        }
         binding.rvScripturalList.adapter = adapter
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.rvScripturalList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))

@@ -36,9 +36,11 @@ class EnglishListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val adapter = EnglishListAdapter(EnglishListItemListener {
-            findNavController().navigate(EnglishListFragmentDirections.actionGlobalDetailFragment(it))
-        })
+        val adapter = EnglishListAdapter {
+            it.id?.let { id ->
+                findNavController().navigate(EnglishListFragmentDirections.actionGlobalDetailFragment(id))
+            }
+        }
         binding.rvEnglishList.adapter = adapter
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.rvEnglishList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))

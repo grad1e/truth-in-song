@@ -9,16 +9,13 @@
             name="model"
             type="dev.rtrilia.truthinsong.models.MalayalamList" />
 
-        <variable
-            name="clickListener"
-            type="dev.rtrilia.truthinsong.ui.malayalam.MalayalamListItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/song_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:onClick="@{()->clickListener.onClick(model.id)}">
+        android:background="?android:attr/selectableItemBackground">
 
         <TextView
             android:id="@+id/tv_song_id"
@@ -35,15 +32,15 @@
 
         <TextView
             android:id="@+id/tv_song_name"
+            style="@style/AppTheme.TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:textSize="16sp"
             android:text="@{model.mal_title}"
-            style="@style/AppTheme.TextView"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_song_id"

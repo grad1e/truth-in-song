@@ -27,7 +27,7 @@ class Repository(private val songBookDao: SongBookDao) {
         return songBookDao.getResponsiveList()
     }
 
-    fun getSong(id: String): LiveData<Song> {
+    suspend fun getSong(id: String): Song {
         return songBookDao.getSong(id)
     }
 

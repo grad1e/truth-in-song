@@ -36,9 +36,11 @@ class MalayalamListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val adapter = MalayalamListAdapter(MalayalamListItemClickListener {
-            findNavController().navigate(MalayalamListFragmentDirections.actionGlobalDetailFragment(it))
-        })
+        val adapter = MalayalamListAdapter {
+            it.id?.let { id ->
+                findNavController().navigate(MalayalamListFragmentDirections.actionGlobalDetailFragment(id))
+            }
+        }
         binding.rvMalayalamList.adapter = adapter
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.rvMalayalamList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
