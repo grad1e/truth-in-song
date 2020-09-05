@@ -10,23 +10,21 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import dev.rtrilia.truthinsong.SongApplication
+import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.databinding.FragmentEnglishListBinding
 
 /**
  * A simple [Fragment] subclass.
  */
+@AndroidEntryPoint
 class EnglishListFragment : Fragment() {
 
     private lateinit var binding: FragmentEnglishListBinding
-    private lateinit var factory: EnglishListViewModelFactory
-    private val viewModel by viewModels<EnglishListViewModel>({ this }, { factory })
+    private val viewModel by viewModels<EnglishListViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentEnglishListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        val repository = (activity?.application as SongApplication).getRepository()
-        factory = EnglishListViewModelFactory(repository)
         return binding.root
     }
 
@@ -51,6 +49,11 @@ class EnglishListFragment : Fragment() {
                 adapter.submitList(it)
             }
         })
+    }
+
+    override fun onDestroyView() {
+        binding.rvEnglishList.adapter = null
+        super.onDestroyView()
     }
 
 

@@ -9,24 +9,21 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import dev.rtrilia.truthinsong.SongApplication
+import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.databinding.FragmentSplashBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+@AndroidEntryPoint
 class SplashFragment : Fragment() {
 
-    private lateinit var binding: FragmentSplashBinding
-    private lateinit var factory: SplashViewModelFactory
-    private val viewModel by viewModels<SplashViewModel>({ this }, { factory })
+    private val viewModel by viewModels<SplashViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentSplashBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        val repository = (requireActivity().application as SongApplication).getRepository()
-        factory = SplashViewModelFactory(repository)
         return binding.root
     }
 

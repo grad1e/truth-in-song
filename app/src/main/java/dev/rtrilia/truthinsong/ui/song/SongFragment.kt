@@ -6,22 +6,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.R
-import dev.rtrilia.truthinsong.SongApplication
 import dev.rtrilia.truthinsong.databinding.FragmentSongBinding
 import dev.rtrilia.truthinsong.ui.home.HomeActivity
 
+@AndroidEntryPoint
 class SongFragment : Fragment() {
 
     private lateinit var binding: FragmentSongBinding
-    private lateinit var factory: SongViewModelFactory
-    private val viewModel by viewModels<SongViewModel>({ this }, { factory })
+    private val viewModel by viewModels<SongViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSongBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        val repository = (activity?.application as SongApplication).getRepository()
-        factory = SongViewModelFactory(repository)
         binding.viewModel = viewModel
         return binding.root
     }

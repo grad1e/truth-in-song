@@ -7,9 +7,10 @@ import dev.rtrilia.truthinsong.models.EnglishList
 import dev.rtrilia.truthinsong.models.MalayalamList
 import dev.rtrilia.truthinsong.models.ResponsiveList
 import dev.rtrilia.truthinsong.models.Song
+import javax.inject.Inject
 
 
-class Repository(private val songBookDao: SongBookDao) {
+class Repository @Inject constructor(private val songBookDao: SongBookDao) {
 
     fun getDbRows(): LiveData<Int> {
         return songBookDao.getDbRows()

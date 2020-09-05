@@ -1,13 +1,14 @@
 package dev.rtrilia.truthinsong.ui.song
 
 import androidx.core.text.HtmlCompat
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.rtrilia.truthinsong.repository.Repository
 import kotlinx.coroutines.launch
 
-class SongViewModel(val repository: Repository) : ViewModel() {
+class SongViewModel @ViewModelInject constructor(val repository: Repository) : ViewModel() {
 
     val songId = MutableLiveData<String>()
     val songMalTitle = MutableLiveData<String>()

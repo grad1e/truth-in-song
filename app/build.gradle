@@ -3,16 +3,19 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
 
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "dev.rtrilia.truthinsong"
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 3
         versionName "1.1"
         vectorDrawables.useSupportLibrary = true
@@ -38,6 +41,11 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
+
+}
+
+kapt {
+    correctErrorTypes true
 }
 
 dependencies {
@@ -46,60 +54,74 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //Kotlin coroutine
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_vesion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_vesion"
 
-    //KTX
+    //Core KTX
     implementation 'androidx.core:core-ktx:1.3.1'
 
     //Lifecycle - ViewModel and LiveData
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
-    kapt "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
     //AppCompat
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 
     //Constraint Layout
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-rc1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
     //Material
     implementation 'com.google.android.material:material:1.3.0-alpha02'
 
     //Room
-    implementation "androidx.room:room-runtime:2.2.5"
-    kapt "androidx.room:room-compiler:2.2.5"
-    implementation "androidx.room:room-ktx:2.2.5"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
 
     //Moshi
-    implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.9.3'
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
 
     //Logging - Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     //Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     //Paging
     implementation "androidx.paging:paging-runtime-ktx:2.1.2"
 
     //LeakCanary
-    //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
 
     //Fragment KTX
     implementation "androidx.fragment:fragment-ktx:1.2.5"
 
-    // recyclerview
+    // Recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha05'
 
-    // multidex
+    // Multidex
     implementation 'com.android.support:multidex:1.0.3'
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
+
+    // Crashlytics
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:17.2.1'
+
+    // Hilt - dagger
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    // Hilt - android
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_android_version"
+    kapt "androidx.hilt:hilt-compiler:$hilt_android_version"
 
 
 }

@@ -18,7 +18,7 @@
         android:name="dev.rtrilia.truthinsong.ui.english.EnglishListFragment"
         tools:layout="@layout/fragment_english_list" />
     <fragment
-        android:id="@+id/detailFragment"
+        android:id="@+id/songFragment"
         android:name="dev.rtrilia.truthinsong.ui.song.SongFragment"
         tools:layout="@layout/fragment_song">
         <argument
@@ -31,8 +31,8 @@
         tools:layout="@layout/fragment_search_list">
         <action
             android:id="@+id/action_searchFragment_to_detailFragment"
-            app:destination="@id/detailFragment"
-            app:popUpTo="@id/detailFragment"
+            app:destination="@id/songFragment"
+            app:popUpTo="@id/songFragment"
             app:popUpToInclusive="true" />
     </dialog>
     <fragment
@@ -53,5 +53,5 @@
         android:id="@+id/homeFragment"
         android:name="dev.rtrilia.truthinsong.ui.home.HomeFragment"
         tools:layout="@layout/home_fragment" />
-    <action android:id="@+id/action_global_detailFragment" app:destination="@id/detailFragment" />
+    <action android:id="@+id/action_global_detailFragment" app:destination="@id/songFragment" />
 </navigation>

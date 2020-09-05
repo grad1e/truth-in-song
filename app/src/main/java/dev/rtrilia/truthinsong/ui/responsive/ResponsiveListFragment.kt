@@ -10,23 +10,21 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import dev.rtrilia.truthinsong.SongApplication
+import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.databinding.FragmentResponsiveListBinding
 
 /**
  * A simple [Fragment] subclass.
  */
+@AndroidEntryPoint
 class ResponsiveListFragment : Fragment() {
 
     private lateinit var binding: FragmentResponsiveListBinding
-    private lateinit var factory: ResponsiveListViewModelFactory
-    private val viewModel by viewModels<ResponsiveListViewModel>({ this }, { factory })
+    private val viewModel by viewModels<ResponsiveListViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentResponsiveListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        val repository = (activity?.application as SongApplication).getRepository()
-        factory = ResponsiveListViewModelFactory(repository)
         return binding.root
     }
 
@@ -51,5 +49,9 @@ class ResponsiveListFragment : Fragment() {
         })
     }
 
+    override fun onDestroyView() {
+        binding.rvScripturalList.adapter = null
+        super.onDestroyView()
+    }
 
 }

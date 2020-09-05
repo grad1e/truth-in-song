@@ -7,9 +7,11 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.R
 import dev.rtrilia.truthinsong.databinding.ActivityHomeBinding
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
@@ -36,7 +38,7 @@ class HomeActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.splashFragment -> setViewsGone()
                 R.id.homeFragment -> setViewsVisible()
-                R.id.detailFragment -> setViewsVisible()
+                R.id.songFragment -> setViewsVisible()
             }
         }
 

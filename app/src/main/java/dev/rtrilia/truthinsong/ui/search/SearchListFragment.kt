@@ -10,20 +10,18 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import dev.rtrilia.truthinsong.SongApplication
+import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.databinding.FragmentSearchListBinding
 
+@AndroidEntryPoint
 class SearchListFragment : DialogFragment() {
 
     private lateinit var binding: FragmentSearchListBinding
-    private lateinit var factory: SearchListViewModelFactory
-    private val viewModel by viewModels<SearchListViewModel>({ this }, { factory })
+    private val viewModel by viewModels<SearchListViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSearchListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        val repository = (activity?.application as SongApplication).getRepository()
-        factory = SearchListViewModelFactory(repository)
         binding.viewModel = viewModel
         return binding.root
     }
@@ -64,5 +62,9 @@ class SearchListFragment : DialogFragment() {
         dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
+    override fun onDestroyView() {
+        binding.recyclerView.adapter = null
+        super.onDestroyView()
+    }
 
 }

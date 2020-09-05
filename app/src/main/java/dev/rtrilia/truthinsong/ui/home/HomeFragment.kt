@@ -9,22 +9,24 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.databinding.HomeFragmentBinding
 import dev.rtrilia.truthinsong.ui.english.EnglishListFragment
 import dev.rtrilia.truthinsong.ui.malayalam.MalayalamListFragment
 import dev.rtrilia.truthinsong.ui.responsive.ResponsiveListFragment
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     companion object {
 
-        private val viewPagerFragmentList = listOf(
+        private fun viewPagerFragmentList() = listOf(
             MalayalamListFragment(),
             EnglishListFragment(),
             ResponsiveListFragment()
         )
 
-        private val viewPagerFragmentLabel = listOf(
+        private fun viewPagerFragmentLabel() = listOf(
             "Malayalam",
             "English",
             "Responsive"
@@ -39,6 +41,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = HomeFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -50,18 +53,20 @@ class HomeFragment : Fragment() {
 
     private fun setupViewPager() {
         binding.homeViewpager.adapter = HomeFragmentViewPagerAdapter(childFragmentManager, lifecycle)
-
         TabLayoutMediator(binding.homeTabLayout, binding.homeViewpager) { tab, position ->
-            tab.text = viewPagerFragmentLabel[position]
+            tab.text = viewPagerFragmentLabel()[position]
         }.attach()
     }
 
     inner class HomeFragmentViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
         FragmentStateAdapter(fragmentManager, lifecycle) {
-        override fun getItemCount(): Int = viewPagerFragmentList.size
-
-        override fun createFragment(position: Int): Fragment = viewPagerFragmentList[position]
+        override fun getItemCount(): Int = viewPagerFragmentList().size
+        override fun createFragment(position: Int): Fragment = viewPagerFragmentList()[position]
     }
 
+    override fun onDestroyView() {
+        binding.homeViewpager.adapter = null
+        super.onDestroyView()
+    }
 
 }
