@@ -19,7 +19,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
-object ApplicationModule {
+class DatabaseModule {
 
     lateinit var database: SongDatabase
 
@@ -45,7 +45,6 @@ object ApplicationModule {
             })
             .fallbackToDestructiveMigration()
             .build()
-
         return database
     }
 

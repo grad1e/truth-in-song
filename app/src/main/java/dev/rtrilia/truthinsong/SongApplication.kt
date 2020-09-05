@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.multidex.MultiDexApplication
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.HiltAndroidApp
-import leakcanary.LeakCanary
 import timber.log.Timber
 
 @HiltAndroidApp
