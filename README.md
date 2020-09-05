@@ -17,3 +17,5 @@ Malayalam song book app using Android Architecture Components in MVVM
 - [Material Components for Android](https://github.com/material-components/material-components-android)
 - [Timber](https://github.com/JakeWharton/timber)
 - [Paging](https://developer.android.com/topic/libraries/architecture/paging)  
+- [Dagger_Hilt](https://dagger.dev/hilt/)  
+
