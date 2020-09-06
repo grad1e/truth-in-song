@@ -9,7 +9,7 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.R
 import dev.rtrilia.truthinsong.databinding.FragmentSongBinding
-import dev.rtrilia.truthinsong.ui.home.HomeActivity
+import dev.rtrilia.truthinsong.ui.MainActivity
 
 @AndroidEntryPoint
 class SongFragment : Fragment() {
@@ -30,12 +30,13 @@ class SongFragment : Fragment() {
         val args by navArgs<SongFragmentArgs>()
         viewModel.getSong(args.id)
         setSongData()
+        setFontSize()
     }
 
     private fun setSongData() {
         viewModel.songId.observe(viewLifecycleOwner) {
             it?.let { songId ->
-                (activity as HomeActivity).supportActionBar?.title = songId
+                (activity as MainActivity).supportActionBar?.title = songId
             }
         }
 
@@ -57,36 +58,50 @@ class SongFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.font_size_decrease -> {
-                binding.songNumber.setTextSize(0, binding.songNumber.textSize - 4.0f)
-                binding.songTitle.setTextSize(0, binding.songTitle.textSize - 4.0f)
-                binding.songContent.setTextSize(0, binding.songContent.textSize - 4.0f)
-                binding.songAuthor.setTextSize(0, binding.songAuthor.textSize - 4.0f)
-                return true
-            }
-            R.id.font_size_increase -> {
-                binding.songNumber.setTextSize(0, binding.songNumber.textSize + 4.0f)
-                binding.songTitle.setTextSize(0, binding.songTitle.textSize + 4.0f)
-                binding.songContent.setTextSize(0, binding.songContent.textSize + 4.0f)
-                binding.songAuthor.setTextSize(0, binding.songAuthor.textSize + 4.0f)
-                return true
-            }
-            R.id.share -> {
-                val songTitle = binding.songTitle.text
-                val songContent = binding.songContent.text
-                val shareString = resources.getString(R.string.share_text, songTitle, songContent)
-                val sendIntent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, shareString)
-                    type = "text/plain"
-                }
-                val shareIntent = Intent.createChooser(sendIntent, null)
-                startActivity(shareIntent)
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
+            R.id.font_size_decrease -> decreaseFontSize()
+            R.id.font_size_increase -> increaseFontSize()
+            R.id.share -> onShareClicked()
         }
+        return super.onOptionsItemSelected(item)
     }
 
+    private fun increaseFontSize() {
+        binding.songNumber.setTextSize(0, binding.songNumber.textSize + 4.0f)
+        binding.songTitle.setTextSize(0, binding.songTitle.textSize + 4.0f)
+        binding.songContent.setTextSize(0, binding.songContent.textSize + 4.0f)
+        binding.songAuthor.setTextSize(0, binding.songAuthor.textSize + 4.0f)
+        viewModel.setFontSize(binding.songNumber.textSize)
+        viewModel.setFontSizeSmall(binding.songAuthor.textSize)
+    }
+
+    private fun decreaseFontSize() {
+        binding.songNumber.setTextSize(0, binding.songNumber.textSize - 4.0f)
+        binding.songTitle.setTextSize(0, binding.songTitle.textSize - 4.0f)
+        binding.songContent.setTextSize(0, binding.songContent.textSize - 4.0f)
+        binding.songAuthor.setTextSize(0, binding.songAuthor.textSize - 4.0f)
+        viewModel.setFontSize(binding.songNumber.textSize)
+        viewModel.setFontSizeSmall(binding.songAuthor.textSize)
+    }
+
+    private fun onShareClicked() {
+        val songTitle = binding.songTitle.text
+        val songContent = binding.songContent.text
+        val shareString = resources.getString(R.string.share_text, songTitle, songContent)
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, shareString)
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+    }
+
+
+    private fun setFontSize() {
+        binding.songNumber.setTextSize(0, viewModel.getFontSize())
+        binding.songTitle.setTextSize(0, viewModel.getFontSize())
+        binding.songContent.setTextSize(0, viewModel.getFontSize())
+        binding.songAuthor.setTextSize(0, viewModel.getFontSizeSmall())
+    }
 
 }

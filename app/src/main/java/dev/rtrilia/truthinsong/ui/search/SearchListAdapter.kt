@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.rtrilia.truthinsong.databinding.ItemFragmentSearchBinding
-import dev.rtrilia.truthinsong.models.Song
+import dev.rtrilia.truthinsong.data.models.Song
 
 class SearchListAdapter(private val clickListener: (Song) -> Unit) : RecyclerView.Adapter<SearchListAdapter.ViewHolder>() {
 

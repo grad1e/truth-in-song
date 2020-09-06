@@ -1,4 +1,4 @@
-package dev.rtrilia.truthinsong.database
+package dev.rtrilia.truthinsong.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
@@ -6,14 +6,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import dev.rtrilia.truthinsong.database.entities.EnglishEntity
-import dev.rtrilia.truthinsong.database.entities.MalayalamEntity
-import dev.rtrilia.truthinsong.database.entities.ResponsiveEntity
-import dev.rtrilia.truthinsong.database.entities.TopicEntity
-import dev.rtrilia.truthinsong.models.EnglishList
-import dev.rtrilia.truthinsong.models.MalayalamList
-import dev.rtrilia.truthinsong.models.ResponsiveList
-import dev.rtrilia.truthinsong.models.Song
+import dev.rtrilia.truthinsong.data.database.entities.EnglishEntity
+import dev.rtrilia.truthinsong.data.database.entities.MalayalamEntity
+import dev.rtrilia.truthinsong.data.database.entities.ResponsiveEntity
+import dev.rtrilia.truthinsong.data.database.entities.TopicEntity
+import dev.rtrilia.truthinsong.data.models.EnglishList
+import dev.rtrilia.truthinsong.data.models.MalayalamList
+import dev.rtrilia.truthinsong.data.models.ResponsiveList
+import dev.rtrilia.truthinsong.data.models.Song
 
 @Dao
 interface SongBookDao {

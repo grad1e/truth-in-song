@@ -1,4 +1,4 @@
-package dev.rtrilia.truthinsong.models
+package dev.rtrilia.truthinsong.data.models
 
 data class EnglishList(
     val id: String?,

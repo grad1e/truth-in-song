@@ -1,4 +1,4 @@
-package dev.rtrilia.truthinsong.ui.home
+package dev.rtrilia.truthinsong.ui
 
 import android.os.Bundle
 import android.view.View
@@ -9,18 +9,18 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.R
-import dev.rtrilia.truthinsong.databinding.ActivityHomeBinding
+import dev.rtrilia.truthinsong.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHomeBinding
+    private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupNavigationItems()
         binding.fabSearch.setOnClickListener {

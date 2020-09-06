@@ -6,4 +6,9 @@ import dev.rtrilia.truthinsong.repository.Repository
 
 class SplashViewModel @ViewModelInject constructor(private val repository: Repository) : ViewModel() {
     fun getDbRows() = repository.getDbRows()
+
+    fun getUiMode() = repository.getUiMode()
+
+    fun setUiMode(value: Int) = repository.setUiMode(value)
+
 }

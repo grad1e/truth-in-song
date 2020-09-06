@@ -128,10 +128,11 @@ dependencies {
     // Hilt - dagger
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
-
-    // Hilt - android
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_android_version"
     kapt "androidx.hilt:hilt-compiler:$hilt_android_version"
+
+    // Preference
+    implementation "androidx.preference:preference-ktx:1.1.1"
 
 
 }

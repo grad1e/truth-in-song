@@ -1,4 +1,4 @@
-package dev.rtrilia.truthinsong.database.entities
+package dev.rtrilia.truthinsong.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

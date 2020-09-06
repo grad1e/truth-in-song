@@ -1,6 +1,7 @@
 package dev.rtrilia.truthinsong.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
@@ -9,8 +10,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dev.rtrilia.truthinsong.database.SongBookDao
-import dev.rtrilia.truthinsong.database.SongDatabase
+import dev.rtrilia.truthinsong.data.database.SongBookDao
+import dev.rtrilia.truthinsong.data.database.SongDatabase
 import dev.rtrilia.truthinsong.util.SongDatabaseUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -51,5 +52,12 @@ class DatabaseModule {
     @Provides
     @Singleton
     fun provideDao(database: SongDatabase): SongBookDao = database.songBookDao()
+
+    @Provides
+    @Singleton
+    fun providePreference(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences("settings_pref", Context.MODE_PRIVATE)
+    }
+
 
 }

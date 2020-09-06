@@ -1,7 +1,7 @@
-package dev.rtrilia.truthinsong.models.toDatabase
+package dev.rtrilia.truthinsong.data.models.toDatabase
 
 import com.squareup.moshi.JsonClass
-import dev.rtrilia.truthinsong.database.entities.ResponsiveEntity
+import dev.rtrilia.truthinsong.data.database.entities.ResponsiveEntity
 
 class ResponsiveJson {
     @JsonClass(generateAdapter = true)

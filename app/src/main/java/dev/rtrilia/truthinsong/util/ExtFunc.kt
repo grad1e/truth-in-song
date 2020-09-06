@@ -1,13 +1,15 @@
 package dev.rtrilia.truthinsong.util
 
-import dev.rtrilia.truthinsong.database.entities.EnglishEntity
-import dev.rtrilia.truthinsong.database.entities.MalayalamEntity
-import dev.rtrilia.truthinsong.database.entities.ResponsiveEntity
-import dev.rtrilia.truthinsong.database.entities.TopicEntity
-import dev.rtrilia.truthinsong.models.toDatabase.EnglishJson
-import dev.rtrilia.truthinsong.models.toDatabase.MalayalamJson
-import dev.rtrilia.truthinsong.models.toDatabase.ResponsiveJson
-import dev.rtrilia.truthinsong.models.toDatabase.TopicsJson
+import android.content.Context
+import android.widget.Toast
+import dev.rtrilia.truthinsong.data.database.entities.EnglishEntity
+import dev.rtrilia.truthinsong.data.database.entities.MalayalamEntity
+import dev.rtrilia.truthinsong.data.database.entities.ResponsiveEntity
+import dev.rtrilia.truthinsong.data.database.entities.TopicEntity
+import dev.rtrilia.truthinsong.data.models.toDatabase.EnglishJson
+import dev.rtrilia.truthinsong.data.models.toDatabase.MalayalamJson
+import dev.rtrilia.truthinsong.data.models.toDatabase.ResponsiveJson
+import dev.rtrilia.truthinsong.data.models.toDatabase.TopicsJson
 
 fun EnglishJson.EnglishJsonResponse.asDatabaseModel(): List<EnglishEntity> {
     return english.map {
@@ -57,4 +59,8 @@ fun TopicsJson.TopicsJsonResponse.asDatabaseModel(): List<TopicEntity> {
             title = it.title
         )
     }
+}
+
+fun Context.showToast(string: String) {
+    Toast.makeText(this, string, Toast.LENGTH_LONG).show()
 }

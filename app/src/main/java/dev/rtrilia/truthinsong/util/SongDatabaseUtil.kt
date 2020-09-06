@@ -3,14 +3,14 @@ package dev.rtrilia.truthinsong.util
 import android.content.res.Resources
 import com.squareup.moshi.Moshi
 import dev.rtrilia.truthinsong.R
-import dev.rtrilia.truthinsong.database.entities.EnglishEntity
-import dev.rtrilia.truthinsong.database.entities.MalayalamEntity
-import dev.rtrilia.truthinsong.database.entities.ResponsiveEntity
-import dev.rtrilia.truthinsong.database.entities.TopicEntity
-import dev.rtrilia.truthinsong.models.toDatabase.EnglishJson
-import dev.rtrilia.truthinsong.models.toDatabase.MalayalamJson
-import dev.rtrilia.truthinsong.models.toDatabase.ResponsiveJson
-import dev.rtrilia.truthinsong.models.toDatabase.TopicsJson
+import dev.rtrilia.truthinsong.data.database.entities.EnglishEntity
+import dev.rtrilia.truthinsong.data.database.entities.MalayalamEntity
+import dev.rtrilia.truthinsong.data.database.entities.ResponsiveEntity
+import dev.rtrilia.truthinsong.data.database.entities.TopicEntity
+import dev.rtrilia.truthinsong.data.models.toDatabase.EnglishJson
+import dev.rtrilia.truthinsong.data.models.toDatabase.MalayalamJson
+import dev.rtrilia.truthinsong.data.models.toDatabase.ResponsiveJson
+import dev.rtrilia.truthinsong.data.models.toDatabase.TopicsJson
 import timber.log.Timber
 
 object SongDatabaseUtil {

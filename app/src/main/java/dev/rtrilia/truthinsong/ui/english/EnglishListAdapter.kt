@@ -6,7 +6,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dev.rtrilia.truthinsong.databinding.ItemEnglishListBinding
-import dev.rtrilia.truthinsong.models.EnglishList
+import dev.rtrilia.truthinsong.data.models.EnglishList
 
 class EnglishListAdapter(val clickItemListener: (EnglishList) -> Unit) :
     PagedListAdapter<EnglishList, EnglishListAdapter.ViewHolder>(EnglishListDiffCallback) {

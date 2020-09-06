@@ -6,7 +6,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dev.rtrilia.truthinsong.databinding.ItemResponsiveListBinding
-import dev.rtrilia.truthinsong.models.ResponsiveList
+import dev.rtrilia.truthinsong.data.models.ResponsiveList
 
 class ResponsiveListAdapter(private val clickListener: (ResponsiveList) -> Unit) :
     PagedListAdapter<ResponsiveList, ResponsiveListAdapter.ViewHolder>(ResponsiveListDiffCallback) {

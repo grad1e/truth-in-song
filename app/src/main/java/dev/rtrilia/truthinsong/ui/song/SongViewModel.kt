@@ -3,10 +3,12 @@ package dev.rtrilia.truthinsong.ui.song
 import android.text.Spanned
 import androidx.core.text.HtmlCompat
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.rtrilia.truthinsong.repository.Repository
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class SongViewModel @ViewModelInject constructor(val repository: Repository) : ViewModel() {
@@ -17,6 +19,7 @@ class SongViewModel @ViewModelInject constructor(val repository: Repository) : V
     val songAuthor = MutableLiveData<String>()
     val songContent = MutableLiveData<Spanned>()
 
+    private val _name = MutableLiveData<String>()
 
     fun getSong(id: String) {
         viewModelScope.launch {
@@ -36,5 +39,11 @@ class SongViewModel @ViewModelInject constructor(val repository: Repository) : V
         }
     }
 
+    fun setFontSize(value: Float) = repository.setFontSize(value)
+    fun getFontSize(): Float = repository.getFontSize()
+
+    fun setFontSizeSmall(value: Float) = repository.setFontSizeSmall(value)
+    fun getFontSizeSmall(): Float = repository.getFontSizeSmall()
 
 }
+

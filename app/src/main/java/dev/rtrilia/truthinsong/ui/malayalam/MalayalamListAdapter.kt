@@ -6,7 +6,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dev.rtrilia.truthinsong.databinding.ItemMalayalamListBinding
-import dev.rtrilia.truthinsong.models.MalayalamList
+import dev.rtrilia.truthinsong.data.models.MalayalamList
 
 
 class MalayalamListAdapter(val clickListener: (MalayalamList) -> Unit) :

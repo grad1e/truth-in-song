@@ -53,5 +53,15 @@
         android:id="@+id/homeFragment"
         android:name="dev.rtrilia.truthinsong.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home" />
-    <action android:id="@+id/action_global_detailFragment" app:destination="@id/songFragment" />
+    <action
+        android:id="@+id/action_global_detailFragment"
+        app:destination="@id/songFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="dev.rtrilia.truthinsong.ui.about.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_about" />
+    <action
+        android:id="@+id/action_global_aboutFragment"
+        app:destination="@id/aboutFragment" />
 </navigation>
