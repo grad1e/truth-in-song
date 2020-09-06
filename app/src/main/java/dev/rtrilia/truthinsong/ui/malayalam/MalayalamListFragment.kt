@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -44,11 +43,11 @@ class MalayalamListFragment : Fragment() {
         binding.rvMalayalamList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
         binding.rvMalayalamList.setHasFixedSize(true)
 
-        viewModel.getMalayalamList().observe(viewLifecycleOwner, Observer {
+        viewModel.getMalayalamList().observe(viewLifecycleOwner) {
             it?.let {
                 adapter.submitList(it)
             }
-        })
+        }
     }
 
 

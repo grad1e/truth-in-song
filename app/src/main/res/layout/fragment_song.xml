@@ -80,7 +80,6 @@
 
                         <TextView
                             android:id="@+id/song_content"
-                            style="@style/AppTheme.TextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:lineSpacingExtra="8sp"

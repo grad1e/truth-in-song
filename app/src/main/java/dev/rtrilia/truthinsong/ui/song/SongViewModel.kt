@@ -1,5 +1,6 @@
 package dev.rtrilia.truthinsong.ui.song
 
+import android.text.Spanned
 import androidx.core.text.HtmlCompat
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
@@ -14,13 +15,13 @@ class SongViewModel @ViewModelInject constructor(val repository: Repository) : V
     val songMalTitle = MutableLiveData<String>()
     val songEngTitle = MutableLiveData<String>()
     val songAuthor = MutableLiveData<String>()
-    val songContent = MutableLiveData<String>()
+    val songContent = MutableLiveData<Spanned>()
 
 
     fun getSong(id: String) {
         viewModelScope.launch {
             val song = repository.getSong(id)
-            songId.value = song.id
+            songId.value = song.song_id
             songMalTitle.value = song.mal_title
             songEngTitle.value = song.eng_title
             songAuthor.value = song.author
@@ -31,7 +32,7 @@ class SongViewModel @ViewModelInject constructor(val repository: Repository) : V
     private fun convertHtmlToSpanned(content: String?) {
         content?.let {
             val str = HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY)
-            songContent.value = str.toString()
+            songContent.value = str
         }
     }
 

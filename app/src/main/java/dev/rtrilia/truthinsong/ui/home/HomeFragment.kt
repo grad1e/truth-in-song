@@ -56,6 +56,7 @@ class HomeFragment : Fragment() {
         TabLayoutMediator(binding.homeTabLayout, binding.homeViewpager) { tab, position ->
             tab.text = viewPagerFragmentLabel()[position]
         }.attach()
+        //binding.homeViewpager.offscreenPageLimit = viewPagerFragmentList().size
     }
 
     inner class HomeFragmentViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :

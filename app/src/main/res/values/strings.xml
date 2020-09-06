@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Truth in Song</string>
-
+    <string name="share_text"><b>%s</b>\n\n%s</string>
 </resources>

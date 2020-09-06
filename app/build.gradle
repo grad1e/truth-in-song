@@ -6,6 +6,7 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
 
@@ -98,7 +99,7 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:2.1.2"
 
     //LeakCanary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
+    // debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
 
     //Fragment KTX
     implementation "androidx.fragment:fragment-ktx:1.2.5"
@@ -111,9 +112,8 @@ dependencies {
 
     // Firebase
     implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
-
-    // Crashlytics
     implementation 'com.google.firebase:firebase-crashlytics-ktx:17.2.1'
+    implementation 'com.google.firebase:firebase-perf:19.0.8'
 
     // Hilt - dagger
     implementation "com.google.dagger:hilt-android:$hilt_version"
