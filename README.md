@@ -9,7 +9,6 @@ Malayalam song book app using Android Architecture Components in MVVM
   - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)  
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)  
   - [Data Binding](https://developer.android.com/topic/libraries/data-binding)  
-  - [View Binding](https://developer.android.com/topic/libraries/view-binding)  
   - [Room](https://developer.android.com/topic/libraries/architecture/room)  
 - [Navigation Components](https://developer.android.com/guide/navigation)  
 - [Moshi](https://github.com/square/moshi)

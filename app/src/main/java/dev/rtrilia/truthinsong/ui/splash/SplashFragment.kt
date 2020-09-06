@@ -21,6 +21,10 @@ import timber.log.Timber
 @AndroidEntryPoint
 class SplashFragment : Fragment() {
 
+    companion object {
+        const val DATABASE_ENTRIES = 1624
+    }
+
     private val viewModel by viewModels<SplashViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,9 +45,7 @@ class SplashFragment : Fragment() {
     private fun checkDataInDb() {
         viewModel.getDbRows().observe(viewLifecycleOwner, Observer {
             Timber.d(it.toString())
-            if (it == 1624) {
-                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
-            }
+            if (it == DATABASE_ENTRIES) navigateToHome()
         })
     }
 
@@ -55,7 +57,9 @@ class SplashFragment : Fragment() {
             UiMode.LIGHT_MODE -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
-    
+
+    private fun navigateToHome() = findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+
 }
 
 
