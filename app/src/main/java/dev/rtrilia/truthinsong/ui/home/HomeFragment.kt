@@ -10,7 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import dev.rtrilia.truthinsong.databinding.HomeFragmentBinding
+import dev.rtrilia.truthinsong.databinding.FragmentHomeBinding
 import dev.rtrilia.truthinsong.ui.english.EnglishListFragment
 import dev.rtrilia.truthinsong.ui.malayalam.MalayalamListFragment
 import dev.rtrilia.truthinsong.ui.responsive.ResponsiveListFragment
@@ -34,13 +34,13 @@ class HomeFragment : Fragment() {
 
     }
 
-    private lateinit var binding: HomeFragmentBinding
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = HomeFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
