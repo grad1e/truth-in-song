@@ -2,18 +2,22 @@ package dev.rtrilia.truthinsong.ui.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import dev.rtrilia.truthinsong.databinding.ItemFragmentSearchBinding
 import dev.rtrilia.truthinsong.data.models.Song
+import dev.rtrilia.truthinsong.databinding.ItemFragmentSearchBinding
 
-class SearchListAdapter(private val clickListener: (Song) -> Unit) : RecyclerView.Adapter<SearchListAdapter.ViewHolder>() {
+class SearchListAdapter(private val clickListener: (Song) -> Unit) : ListAdapter<Song, SearchListAdapter.ViewHolder>(SearchListDiffUtil) {
 
-    private val searchList = arrayListOf<Song>()
+    object SearchListDiffUtil : DiffUtil.ItemCallback<Song>() {
+        override fun areItemsTheSame(oldItem: Song, newItem: Song): Boolean {
+            return oldItem.id == newItem.id
+        }
 
-    fun setListData(listData: List<Song>) {
-        searchList.clear()
-        searchList.addAll(listData)
-        notifyDataSetChanged()
+        override fun areContentsTheSame(oldItem: Song, newItem: Song): Boolean {
+            return oldItem == newItem
+        }
     }
 
     class ViewHolder(val binding: ItemFragmentSearchBinding) : RecyclerView.ViewHolder(binding.root)
@@ -22,14 +26,10 @@ class SearchListAdapter(private val clickListener: (Song) -> Unit) : RecyclerVie
         return ViewHolder(ItemFragmentSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
-    override fun getItemCount(): Int {
-        return searchList.size
-    }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.model = searchList[position]
+        holder.binding.model = getItem(position)
         holder.binding.songLayout.setOnClickListener {
-            clickListener(searchList[position])
+            clickListener(getItem(position))
         }
     }
 }

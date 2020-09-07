@@ -51,7 +51,7 @@ class SearchListFragment : DialogFragment() {
         binding.recyclerView.adapter = adapter
         viewModel.getSearchList().observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.setListData(it)
+                adapter.submitList(it)
             }
         })
     }

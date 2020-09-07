@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import dev.rtrilia.truthinsong.databinding.ItemEnglishListBinding
 import dev.rtrilia.truthinsong.data.models.EnglishList
+import dev.rtrilia.truthinsong.databinding.ItemEnglishListBinding
 
 class EnglishListAdapter(val clickItemListener: (EnglishList) -> Unit) :
     PagedListAdapter<EnglishList, EnglishListAdapter.ViewHolder>(EnglishListDiffCallback) {
@@ -33,8 +33,8 @@ class EnglishListAdapter(val clickItemListener: (EnglishList) -> Unit) :
         val listItem = getItem(position)
         holder.binding.model = listItem
         holder.binding.songLayout.setOnClickListener {
-            if (listItem != null) {
-                clickItemListener(listItem)
+            listItem?.let {
+                clickItemListener(it)
             }
         }
     }
