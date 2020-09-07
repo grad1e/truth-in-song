@@ -61,6 +61,4 @@ fun TopicsJson.TopicsJsonResponse.asDatabaseModel(): List<TopicEntity> {
     }
 }
 
-fun Context.showToast(string: String) {
-    Toast.makeText(this, string, Toast.LENGTH_LONG).show()
-}
+
