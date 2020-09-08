@@ -1,7 +1,6 @@
 package dev.rtrilia.truthinsong.ui
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -10,6 +9,8 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.R
 import dev.rtrilia.truthinsong.databinding.ActivityMainBinding
+import dev.rtrilia.truthinsong.util.hide
+import dev.rtrilia.truthinsong.util.show
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -45,13 +46,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setViewsGone() {
-        binding.homeToolbar.visibility = View.GONE
-        binding.fabSearch.visibility = View.GONE
+        binding.homeToolbar.hide()
+        binding.fabSearch.hide()
     }
 
     private fun setViewsVisible() {
-        binding.homeToolbar.visibility = View.VISIBLE
-        binding.fabSearch.visibility = View.VISIBLE
+        binding.homeToolbar.show()
+        binding.fabSearch.show()
     }
 
     fun setToolbarTitle(title: String) {

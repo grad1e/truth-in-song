@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.databinding.FragmentSplashBinding
 import dev.rtrilia.truthinsong.util.UiMode
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -25,10 +24,11 @@ class SplashFragment : Fragment() {
         const val DATABASE_ENTRIES = 1624
     }
 
+    private lateinit var binding: FragmentSplashBinding
     private val viewModel by viewModels<SplashViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentSplashBinding.inflate(inflater, container, false)
+        binding = FragmentSplashBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
@@ -36,16 +36,16 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAppTheme()
-        lifecycleScope.launch(Dispatchers.Main) {
-            delay(1000)
-            checkDataInDb()
-        }
+        checkDataInDb()
     }
 
     private fun checkDataInDb() {
         viewModel.getDbRows().observe(viewLifecycleOwner, Observer {
             Timber.d(it.toString())
-            if (it == DATABASE_ENTRIES) navigateToHome()
+            binding.progressBar.setProgressCompat(it, true)
+            if (DATABASE_ENTRIES == it) {
+                navigateToHome()
+            }
         })
     }
 
@@ -58,7 +58,12 @@ class SplashFragment : Fragment() {
         }
     }
 
-    private fun navigateToHome() = findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+    private fun navigateToHome() {
+        lifecycleScope.launch {
+            delay(1000)
+            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+        }
+    }
 
 }
 

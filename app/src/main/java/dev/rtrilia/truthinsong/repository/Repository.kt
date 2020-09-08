@@ -37,13 +37,13 @@ class Repository @Inject constructor(private val songBookDao: SongBookDao, priva
         return songBookDao.getSearchList(songIdQuery, malTitleQuery, engTitleQuery)
     }
 
-    fun setUiMode(value: Int) = preferences.setUiMode(value)
-    fun getUiMode(): Int = preferences.getUiMode()
+    fun setUiModePref(value: Int) = preferences.setUiMode(value)
+    fun getUiModePref(): Int = preferences.getUiMode()
 
-    fun setFontSize(value: Float) = preferences.setFontSize(value)
-    fun getFontSize(): Float = preferences.getFontSize()
+    fun setFontSizePref(value: Float) = preferences.setFontSize(value)
+    fun getFontSizePref(): Float = preferences.getFontSize()
 
-    fun setFontSizeSmall(value: Float) = preferences.setFontSizeSmall(value)
-    fun getFontSizeSmall(): Float = preferences.getFontSizeSmall()
+    fun setFontSizeSmallPref(value: Float) = preferences.setFontSizeSmall(value)
+    fun getFontSizeSmallPref(): Float = preferences.getFontSizeSmall()
 
 }

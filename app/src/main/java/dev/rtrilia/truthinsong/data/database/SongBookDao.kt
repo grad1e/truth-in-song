@@ -45,7 +45,7 @@ interface SongBookDao {
     @Query("SELECT id,song_id,mal_title,eng_title,author,content,translate_id FROM(SELECT id,song_id,NULL as mal_title,eng_title,author,content,translate_id FROM EnglishEntity UNION ALL SELECT id,song_id,mal_title,eng_title,author,content,translate_id FROM MalayalamEntity UNION ALL SELECT id,song_id,mal_title,eng_title,Null as author,content,NULL as translate_id FROM ResponsiveEntity) WHERE id=:id")
     suspend fun getSong(id: String): Song
 
-    @Query("SELECT id,song_id,mal_title,eng_title,author,content,translate_id FROM(SELECT id,song_id,NULL as mal_title,eng_title,author,content,translate_id FROM EnglishEntity UNION ALL SELECT id,song_id,mal_title,eng_title,author,content,translate_id FROM MalayalamEntity UNION ALL SELECT id,song_id,mal_title,eng_title,Null as author,content,NULL as translate_id FROM ResponsiveEntity) WHERE (song_id like :songIdQuery or mal_title like :malTitleQuery or eng_title like :engTitleQuery or content like :engTitleQuery) LIMIT 20")
+    @Query("SELECT id,song_id,mal_title,eng_title,author,content,translate_id FROM(SELECT id,song_id,NULL as mal_title,eng_title,author,content,translate_id FROM EnglishEntity UNION ALL SELECT id,song_id,mal_title,eng_title,author,content,translate_id FROM MalayalamEntity UNION ALL SELECT id,song_id,mal_title,eng_title,Null as author,content,NULL as translate_id FROM ResponsiveEntity) WHERE (song_id like :songIdQuery or mal_title like :malTitleQuery or eng_title like :engTitleQuery or content like :engTitleQuery) LIMIT 200")
     fun getSearchList(songIdQuery: String?, malTitleQuery: String?, engTitleQuery: String?): LiveData<List<Song>>
 
 }

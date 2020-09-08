@@ -1,7 +1,5 @@
 package dev.rtrilia.truthinsong.util
 
-import android.content.Context
-import android.widget.Toast
 import dev.rtrilia.truthinsong.data.database.entities.EnglishEntity
 import dev.rtrilia.truthinsong.data.database.entities.MalayalamEntity
 import dev.rtrilia.truthinsong.data.database.entities.ResponsiveEntity

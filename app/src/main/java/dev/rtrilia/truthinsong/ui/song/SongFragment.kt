@@ -70,8 +70,8 @@ class SongFragment : Fragment() {
         binding.songTitle.setTextSize(0, binding.songTitle.textSize + 4.0f)
         binding.songContent.setTextSize(0, binding.songContent.textSize + 4.0f)
         binding.songAuthor.setTextSize(0, binding.songAuthor.textSize + 4.0f)
-        viewModel.setFontSize(binding.songNumber.textSize)
-        viewModel.setFontSizeSmall(binding.songAuthor.textSize)
+        viewModel.setFontSizePref(binding.songNumber.textSize)
+        viewModel.setFontSizeSmallPref(binding.songAuthor.textSize)
     }
 
     private fun decreaseFontSize() {
@@ -79,8 +79,8 @@ class SongFragment : Fragment() {
         binding.songTitle.setTextSize(0, binding.songTitle.textSize - 4.0f)
         binding.songContent.setTextSize(0, binding.songContent.textSize - 4.0f)
         binding.songAuthor.setTextSize(0, binding.songAuthor.textSize - 4.0f)
-        viewModel.setFontSize(binding.songNumber.textSize)
-        viewModel.setFontSizeSmall(binding.songAuthor.textSize)
+        viewModel.setFontSizePref(binding.songNumber.textSize)
+        viewModel.setFontSizeSmallPref(binding.songAuthor.textSize)
     }
 
     private fun onShareClicked() {
@@ -98,10 +98,14 @@ class SongFragment : Fragment() {
 
 
     private fun setFontSize() {
-        binding.songNumber.setTextSize(0, viewModel.getFontSize())
-        binding.songTitle.setTextSize(0, viewModel.getFontSize())
-        binding.songContent.setTextSize(0, viewModel.getFontSize())
-        binding.songAuthor.setTextSize(0, viewModel.getFontSizeSmall())
+        if (viewModel.getFontSizePref() != 0f) {
+            binding.songNumber.setTextSize(0, viewModel.getFontSizePref())
+            binding.songTitle.setTextSize(0, viewModel.getFontSizePref())
+            binding.songContent.setTextSize(0, viewModel.getFontSizePref())
+        }
+        if (viewModel.getFontSizeSmallPref() != 0f) {
+            binding.songAuthor.setTextSize(0, viewModel.getFontSizeSmallPref())
+        }
     }
 
 }

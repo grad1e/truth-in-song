@@ -18,12 +18,12 @@ class PreferenceHandler @Inject constructor(private val preferences: SharedPrefe
         putInt(UI_MODE, value)
     }
 
-    fun getFontSize() = preferences.getFloat(FONT_SIZE, 44f)
+    fun getFontSize() = preferences.getFloat(FONT_SIZE, 0f)
     fun setFontSize(value: Float) = preferences.edit {
         putFloat(FONT_SIZE, value)
     }
 
-    fun getFontSizeSmall() = preferences.getFloat(FONT_SIZE_SMALL, 33f)
+    fun getFontSizeSmall() = preferences.getFloat(FONT_SIZE_SMALL, 0f)
     fun setFontSizeSmall(value: Float) = preferences.edit {
         putFloat(FONT_SIZE_SMALL, value)
     }
