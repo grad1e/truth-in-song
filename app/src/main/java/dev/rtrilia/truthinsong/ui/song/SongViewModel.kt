@@ -3,6 +3,7 @@ package dev.rtrilia.truthinsong.ui.song
 import android.text.Spanned
 import androidx.core.text.HtmlCompat
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,21 +12,34 @@ import kotlinx.coroutines.launch
 
 class SongViewModel @ViewModelInject constructor(val repository: Repository) : ViewModel() {
 
-    val songId = MutableLiveData<String>()
-    val songMalTitle = MutableLiveData<String>()
-    val songEngTitle = MutableLiveData<String>()
-    val songAuthor = MutableLiveData<String>()
-    val songContent = MutableLiveData<Spanned>()
+    private val _songId = MutableLiveData<String?>()
+    val songId: LiveData<String?>
+        get() = _songId
 
-    private val _name = MutableLiveData<String>()
+    private val _songMalTitle = MutableLiveData<String?>()
+    val songMalTitle: LiveData<String?>
+        get() = _songMalTitle
+
+    private val _songEngTitle = MutableLiveData<String?>()
+    val songEngTitle: LiveData<String?>
+        get() = _songEngTitle
+
+    private val _songAuthor = MutableLiveData<String?>()
+    val songAuthor: LiveData<String?>
+        get() = _songAuthor
+
+    private val _songContent = MutableLiveData<Spanned>()
+    val songContent: LiveData<Spanned>
+        get() = _songContent
+
 
     fun getSong(id: String) {
         viewModelScope.launch {
             val song = repository.getSong(id)
-            songId.value = song.song_id
-            songMalTitle.value = song.mal_title
-            songEngTitle.value = song.eng_title
-            songAuthor.value = song.author
+            _songId.value = song.song_id
+            _songMalTitle.value = song.mal_title
+            _songEngTitle.value = song.eng_title
+            _songAuthor.value = song.author
             convertHtmlToSpanned(song.content)
         }
     }
@@ -33,7 +47,7 @@ class SongViewModel @ViewModelInject constructor(val repository: Repository) : V
     private fun convertHtmlToSpanned(content: String?) {
         content?.let {
             val str = HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY)
-            songContent.value = str
+            _songContent.value = str
         }
     }
 

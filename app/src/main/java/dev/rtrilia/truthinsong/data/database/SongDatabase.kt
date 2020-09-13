@@ -9,7 +9,7 @@ import dev.rtrilia.truthinsong.data.database.entities.TopicEntity
 
 @Database(
     entities = [MalayalamEntity::class, EnglishEntity::class, ResponsiveEntity::class, TopicEntity::class],
-    version = 2,
+    version = 4,
     exportSchema = false
 )
 abstract class SongDatabase : RoomDatabase() {
