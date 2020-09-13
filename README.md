@@ -19,4 +19,5 @@ Malayalam song book app using Android Architecture Components in MVVM
 - [Dagger-Hilt](https://dagger.dev/hilt/)
 - Dark mode (auto and picker)
 - Edge to Edge window insets
+- Crashlytics
 
