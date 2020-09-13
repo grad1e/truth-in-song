@@ -1,6 +1,5 @@
 package dev.rtrilia.truthinsong.ui.home
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
@@ -10,15 +9,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.R
+import dev.rtrilia.truthinsong.data.database.SongBookDao
 import dev.rtrilia.truthinsong.databinding.FragmentHomeBinding
 import dev.rtrilia.truthinsong.ui.MainActivity
 import dev.rtrilia.truthinsong.ui.english.EnglishListFragment
 import dev.rtrilia.truthinsong.ui.malayalam.MalayalamListFragment
 import dev.rtrilia.truthinsong.ui.responsive.ResponsiveListFragment
 import dev.rtrilia.truthinsong.util.UiMode
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -94,7 +96,7 @@ class HomeFragment : Fragment() {
     private fun openThemePickerDialog() {
         val styles = arrayOf("Light", "Dark", "System default")
         val checkedItem = viewModel.getUiMode()
-        AlertDialog.Builder(requireContext()).apply {
+        MaterialAlertDialogBuilder(requireContext()).apply {
             setTitle("Choose Theme")
             setSingleChoiceItems(styles, checkedItem) { dialog, uiMode ->
                 when (uiMode) {

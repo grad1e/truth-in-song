@@ -19,7 +19,11 @@ class SearchListFragment : DialogFragment() {
     private lateinit var binding: FragmentSearchListBinding
     private val viewModel by viewModels<SearchListViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentSearchListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
@@ -45,7 +49,11 @@ class SearchListFragment : DialogFragment() {
     private fun setupRecyclerView() {
         val adapter = SearchListAdapter {
             it.id?.let { id ->
-                findNavController().navigate(SearchListFragmentDirections.actionSearchFragmentToDetailFragment(id))
+                findNavController().navigate(
+                    SearchListFragmentDirections.actionSearchFragmentToDetailFragment(
+                        id
+                    )
+                )
             }
         }
         binding.recyclerView.adapter = adapter
@@ -59,7 +67,10 @@ class SearchListFragment : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
     }
 
     override fun onDestroyView() {

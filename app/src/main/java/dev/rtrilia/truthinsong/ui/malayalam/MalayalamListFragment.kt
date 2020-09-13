@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +22,11 @@ class MalayalamListFragment : Fragment() {
     private lateinit var binding: FragmentMalayalamListBinding
     private val viewModel by viewModels<MalayalamListViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentMalayalamListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -35,19 +40,29 @@ class MalayalamListFragment : Fragment() {
     private fun setupRecyclerView() {
         val adapter = MalayalamListAdapter {
             it.id?.let { id ->
-                findNavController().navigate(MalayalamListFragmentDirections.actionGlobalDetailFragment(id))
+                findNavController().navigate(
+                    MalayalamListFragmentDirections.actionGlobalDetailFragment(
+                        id
+                    )
+                )
             }
         }
         binding.rvMalayalamList.adapter = adapter
-        adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        binding.rvMalayalamList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+        adapter.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        binding.rvMalayalamList.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                RecyclerView.VERTICAL
+            )
+        )
         binding.rvMalayalamList.setHasFixedSize(true)
 
-        viewModel.getMalayalamList().observe(viewLifecycleOwner) {
+        viewModel.getMalayalamList().observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }
-        }
+        })
     }
 
 

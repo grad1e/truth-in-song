@@ -21,8 +21,10 @@
             android:id="@+id/song_scrollview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipToPadding="false"
             android:fadeScrollbars="true"
-            android:scrollbars="vertical">
+            android:scrollbars="vertical"
+            app:bottomInsetPadding="@{true}">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout

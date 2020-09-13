@@ -2,16 +2,14 @@ package dev.rtrilia.truthinsong.data.preference
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import dev.rtrilia.truthinsong.util.Constants.FONT_SIZE
+import dev.rtrilia.truthinsong.util.Constants.FONT_SIZE_SMALL
+import dev.rtrilia.truthinsong.util.Constants.UI_MODE
 import dev.rtrilia.truthinsong.util.UiMode
 import javax.inject.Inject
 
 class PreferenceHandler @Inject constructor(private val preferences: SharedPreferences) {
 
-    companion object {
-        const val UI_MODE = "ui_mode"
-        const val FONT_SIZE = "font_size"
-        const val FONT_SIZE_SMALL = "font_size_small"
-    }
 
     fun getUiMode() = preferences.getInt(UI_MODE, UiMode.SYSTEM_DEFAULT)
     fun setUiMode(value: Int) = preferences.edit {

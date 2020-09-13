@@ -2,6 +2,7 @@ package dev.rtrilia.truthinsong.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupNavigationItems()
+        setupEdgeToEdge()
         binding.fabSearch.setOnClickListener {
             openSearch()
         }
@@ -32,7 +34,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavigationItems() {
         navController = findNavController(R.id.nav_host_fragment)
         setSupportActionBar(binding.homeToolbar)
-        val appBarConfiguration = AppBarConfiguration.Builder(R.id.splashFragment, R.id.homeFragment).build()
+        val appBarConfiguration =
+            AppBarConfiguration.Builder(R.id.splashFragment, R.id.homeFragment).build()
         binding.homeToolbar.setupWithNavController(navController, appBarConfiguration)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -42,7 +45,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.songFragment -> setViewsVisible()
             }
         }
-
     }
 
     private fun setViewsGone() {
@@ -55,16 +57,12 @@ class MainActivity : AppCompatActivity() {
         binding.fabSearch.show()
     }
 
-    fun setToolbarTitle(title: String) {
-        binding.homeToolbar.title = title
-    }
-
     private fun openSearch() {
         navController.navigate(R.id.action_global_searchFragment)
     }
 
+    private fun setupEdgeToEdge() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+    }
 
 }
-
-
-

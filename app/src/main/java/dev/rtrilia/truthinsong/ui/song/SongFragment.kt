@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.R
@@ -17,7 +18,11 @@ class SongFragment : Fragment() {
     private lateinit var binding: FragmentSongBinding
     private val viewModel by viewModels<SongViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentSongBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
@@ -34,19 +39,21 @@ class SongFragment : Fragment() {
     }
 
     private fun setSongData() {
-        viewModel.songId.observe(viewLifecycleOwner) {
+        viewModel.songId.observe(viewLifecycleOwner, Observer {
             it?.let { songId ->
                 (activity as MainActivity).supportActionBar?.title = songId
             }
-        }
+        })
 
-        viewModel.songAuthor.observe(viewLifecycleOwner) {
+        viewModel.songAuthor.observe(viewLifecycleOwner, Observer {
             it?.let { author ->
                 if (author.isBlank()) {
                     binding.songAuthor.visibility = View.GONE
                 }
             }
-        }
+        })
+
+
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 

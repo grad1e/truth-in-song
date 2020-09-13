@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -12,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.databinding.FragmentSplashBinding
+import dev.rtrilia.truthinsong.util.Constants.DATABASE_ENTRIES
 import dev.rtrilia.truthinsong.util.UiMode
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -20,14 +23,14 @@ import timber.log.Timber
 @AndroidEntryPoint
 class SplashFragment : Fragment() {
 
-    companion object {
-        const val DATABASE_ENTRIES = 1624
-    }
-
     private lateinit var binding: FragmentSplashBinding
     private val viewModel by viewModels<SplashViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentSplashBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root

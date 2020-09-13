@@ -13,9 +13,8 @@
         <item name="colorOnSurface">@color/surfaceTextColor</item>
         <item name="android:colorBackground">@color/backgroundColor</item>
 
-        <item name="android:navigationBarColor">#41000000</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-
 
         <item name="android:textColor">@android:color/black</item>
 
