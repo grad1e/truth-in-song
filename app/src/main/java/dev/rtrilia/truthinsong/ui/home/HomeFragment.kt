@@ -13,14 +13,15 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.R
-import dev.rtrilia.truthinsong.data.database.SongBookDao
 import dev.rtrilia.truthinsong.databinding.FragmentHomeBinding
 import dev.rtrilia.truthinsong.ui.MainActivity
 import dev.rtrilia.truthinsong.ui.english.EnglishListFragment
 import dev.rtrilia.truthinsong.ui.malayalam.MalayalamListFragment
 import dev.rtrilia.truthinsong.ui.responsive.ResponsiveListFragment
+import dev.rtrilia.truthinsong.util.Constants
+import dev.rtrilia.truthinsong.util.ShuffleMode
 import dev.rtrilia.truthinsong.util.UiMode
-import javax.inject.Inject
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -62,14 +63,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupViewPager() {
-        binding.homeViewpager.adapter = HomeFragmentViewPagerAdapter(childFragmentManager, lifecycle)
+        binding.homeViewpager.adapter =
+            HomeFragmentViewPagerAdapter(childFragmentManager, lifecycle)
         TabLayoutMediator(binding.homeTabLayout, binding.homeViewpager) { tab, position ->
             tab.text = viewPagerFragmentLabel()[position]
         }.attach()
         //binding.homeViewpager.offscreenPageLimit = viewPagerFragmentList().size
     }
 
-    inner class HomeFragmentViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+    inner class HomeFragmentViewPagerAdapter(
+        fragmentManager: FragmentManager,
+        lifecycle: Lifecycle
+    ) :
         FragmentStateAdapter(fragmentManager, lifecycle) {
         override fun getItemCount(): Int = viewPagerFragmentList().size
         override fun createFragment(position: Int): Fragment = viewPagerFragmentList()[position]
@@ -89,6 +94,8 @@ class HomeFragment : Fragment() {
         when (item.itemId) {
             R.id.theme -> openThemePickerDialog()
             R.id.about -> findNavController().navigate(HomeFragmentDirections.actionGlobalAboutFragment())
+            R.id.shuffle -> onShuffleClicked()
+            R.id.shuffle_mode -> openShuffleModePickerDialog()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -120,6 +127,51 @@ class HomeFragment : Fragment() {
             create()
             show()
         }
+    }
+
+    private fun openShuffleModePickerDialog() {
+        val shuffleModes = arrayOf("Malayalam Only", "English Only", "Both Malayalam and English")
+        val checkedItem = viewModel.getShuffleMode()
+        MaterialAlertDialogBuilder(requireContext()).apply {
+            setTitle("Choose Shuffle Mode")
+            setSingleChoiceItems(shuffleModes, checkedItem) { dialog, shuffleMode ->
+                when (shuffleMode) {
+                    ShuffleMode.MALAYALAM_ONLY -> {
+                        viewModel.setShuffleMode(ShuffleMode.MALAYALAM_ONLY)
+                        dialog.cancel()
+                    }
+                    ShuffleMode.ENGLISH_ONLY -> {
+                        viewModel.setShuffleMode(ShuffleMode.ENGLISH_ONLY)
+                        dialog.cancel()
+                    }
+                    ShuffleMode.BOTH_MALAYALAM_ENGLISH -> {
+                        viewModel.setShuffleMode(ShuffleMode.BOTH_MALAYALAM_ENGLISH)
+                        dialog.cancel()
+                    }
+                }
+            }
+            create()
+            show()
+        }
+    }
+
+    private fun onShuffleClicked() {
+        val id = when (viewModel.getShuffleMode()) {
+            ShuffleMode.MALAYALAM_ONLY -> Random.nextInt(
+                Constants.MALAYALAM_ID_START,
+                Constants.MALAYALAM_ID_END
+            )
+            ShuffleMode.ENGLISH_ONLY -> Random.nextInt(
+                Constants.ENGLISH_ID_START,
+                Constants.ENGLISH_ID_END
+            )
+            ShuffleMode.BOTH_MALAYALAM_ENGLISH -> Random.nextInt(
+                Constants.MALAYALAM_ID_START,
+                Constants.ENGLISH_ID_END
+            )
+            else -> 0
+        }
+        findNavController().navigate(HomeFragmentDirections.actionGlobalDetailFragment(id.toString()))
     }
 
 

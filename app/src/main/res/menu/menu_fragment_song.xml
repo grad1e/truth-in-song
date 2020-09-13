@@ -2,18 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/font_size_decrease"
-        android:icon="@drawable/ic_decrease"
-        android:title="Decrease Font Size"
-        android:visible="true"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/font_size_increase"
-        android:icon="@drawable/ic_increase"
-        android:title="Increase Font Size"
-        android:visible="true"
-        app:showAsAction="always" />
 
     <item
         android:id="@+id/share"
@@ -21,4 +9,25 @@
         android:title="Share"
         android:visible="true"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/shuffle"
+        android:icon="@drawable/ic_shuffle"
+        android:title="Shuffle"
+        android:visible="true"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/font_size_decrease"
+        android:icon="@drawable/ic_decrease"
+        android:title="Decrease Font Size"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/font_size_increase"
+        android:icon="@drawable/ic_increase"
+        android:title="Increase Font Size"
+        android:visible="true"
+        app:showAsAction="never" />
+
 </menu>

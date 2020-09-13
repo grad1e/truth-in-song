@@ -6,11 +6,16 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.R
 import dev.rtrilia.truthinsong.databinding.FragmentSongBinding
 import dev.rtrilia.truthinsong.ui.MainActivity
+import dev.rtrilia.truthinsong.ui.home.HomeFragmentDirections
+import dev.rtrilia.truthinsong.util.Constants
+import dev.rtrilia.truthinsong.util.ShuffleMode
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class SongFragment : Fragment() {
@@ -68,6 +73,7 @@ class SongFragment : Fragment() {
             R.id.font_size_decrease -> decreaseFontSize()
             R.id.font_size_increase -> increaseFontSize()
             R.id.share -> onShareClicked()
+            R.id.shuffle -> onShuffleClicked()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -103,6 +109,24 @@ class SongFragment : Fragment() {
         startActivity(shareIntent)
     }
 
+    private fun onShuffleClicked() {
+        val id = when (viewModel.getShuffleMode()) {
+            ShuffleMode.MALAYALAM_ONLY -> Random.nextInt(
+                Constants.MALAYALAM_ID_START,
+                Constants.MALAYALAM_ID_END
+            )
+            ShuffleMode.ENGLISH_ONLY -> Random.nextInt(
+                Constants.ENGLISH_ID_START,
+                Constants.ENGLISH_ID_END
+            )
+            ShuffleMode.BOTH_MALAYALAM_ENGLISH -> Random.nextInt(
+                Constants.MALAYALAM_ID_START,
+                Constants.ENGLISH_ID_END
+            )
+            else -> 0
+        }
+        findNavController().navigate(HomeFragmentDirections.actionGlobalDetailFragment(id.toString()))
+    }
 
     private fun setFontSize() {
         if (viewModel.getFontSizePref() != 0f) {
@@ -114,5 +138,6 @@ class SongFragment : Fragment() {
             binding.songAuthor.setTextSize(0, viewModel.getFontSizeSmallPref())
         }
     }
+
 
 }
