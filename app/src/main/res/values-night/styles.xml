@@ -28,5 +28,8 @@
         <item name="colorOnSurface">@color/surfaceTextColorNight</item>
     </style>
 
+    <style name="AppTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="hintTextColor">@android:color/white</item>
+    </style>
 
 </resources>
