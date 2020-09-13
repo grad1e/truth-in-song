@@ -7,6 +7,7 @@
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
         <item name="colorOnPrimary">@color/primaryTextColor</item>
 
+        <item name="colorSurface">@color/surfaceColorNight</item>
         <item name="colorOnSurface">@color/surfaceTextColorNight</item>
 
         <item name="android:statusBarColor">@android:color/transparent</item>
@@ -29,8 +30,7 @@
     </style>
 
     <style name="AppTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="hintTextColor">@android:color/white</item>
+        <item name="hintTextColor">@color/surfaceTextColorNight</item>
     </style>
-
 
 </resources>
