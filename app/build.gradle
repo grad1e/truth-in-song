@@ -6,6 +6,7 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'dagger.hilt.android.plugin'
+//apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
 
@@ -116,10 +117,11 @@ dependencies {
     // Firebase
     implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:17.2.1'
+//    implementation 'com.google.firebase:firebase-perf:19.0.8'
 
     // Hilt - dagger
     implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_android_version"
     kapt "androidx.hilt:hilt-compiler:$hilt_android_version"
 
