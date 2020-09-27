@@ -6,7 +6,7 @@ import dev.rtrilia.truthinsong.data.preference.PreferenceHandler
 import timber.log.Timber
 import javax.inject.Inject
 
-class CrashReportingTree @Inject constructor(val sharedPreferences: PreferenceHandler) :
+class CrashReportingTree @Inject constructor(private val sharedPreferences: PreferenceHandler) :
     Timber.Tree() {
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         if (priority == Log.VERBOSE || priority == Log.INFO) return
