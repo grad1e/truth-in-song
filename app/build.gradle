@@ -6,10 +6,17 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'dagger.hilt.android.plugin'
-//apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
 
+    signingConfigs {
+        release {
+            storeFile file('E:\\Documents\\Key\\rtrilia.jks')
+            storePassword 'KKL#123home'
+            keyAlias 'rtrilia'
+            keyPassword 'KKL#123home'
+        }
+    }
     compileSdkVersion 30
 
     defaultConfig {
@@ -42,9 +49,11 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled = true
+            debuggable true
+            minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     kotlinOptions {
@@ -70,7 +79,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_vesion"
 
     //Core KTX
-    implementation 'androidx.core:core-ktx:1.5.0-alpha02'
+    implementation 'androidx.core:core-ktx:1.5.0-alpha03'
 
     //Lifecycle - ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
@@ -117,7 +126,6 @@ dependencies {
     // Firebase
     implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:17.2.1'
-//    implementation 'com.google.firebase:firebase-perf:19.0.8'
 
     // Hilt - dagger
     implementation "com.google.dagger:hilt-android:$hilt_version"

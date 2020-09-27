@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -64,7 +62,13 @@ class SplashFragment : Fragment() {
     private fun navigateToHome() {
         lifecycleScope.launch {
             delay(1000)
-            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+            binding.splashLayout.animate().apply {
+                duration = 250
+                alpha(0f)
+                withEndAction {
+                    findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+                }
+            }.start()
         }
     }
 

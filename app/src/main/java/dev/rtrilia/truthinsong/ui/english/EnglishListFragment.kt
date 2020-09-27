@@ -22,7 +22,11 @@ class EnglishListFragment : Fragment() {
     private lateinit var binding: FragmentEnglishListBinding
     private val viewModel by viewModels<EnglishListViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentEnglishListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -36,12 +40,22 @@ class EnglishListFragment : Fragment() {
     private fun setupRecyclerView() {
         val adapter = EnglishListAdapter {
             it.id?.let { id ->
-                findNavController().navigate(EnglishListFragmentDirections.actionGlobalDetailFragment(id))
+                findNavController().navigate(
+                    EnglishListFragmentDirections.actionGlobalDetailFragment(
+                        id
+                    )
+                )
             }
         }
         binding.rvEnglishList.adapter = adapter
-        adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        binding.rvEnglishList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+        adapter.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        binding.rvEnglishList.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                RecyclerView.VERTICAL
+            )
+        )
         binding.rvEnglishList.setHasFixedSize(true)
 
         viewModel.getEnglishList().observe(viewLifecycleOwner, Observer {
