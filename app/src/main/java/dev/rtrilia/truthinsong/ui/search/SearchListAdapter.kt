@@ -30,7 +30,7 @@ class SearchListAdapter(private val clickListener: (Song) -> Unit) : ListAdapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.model = getItem(position)
         holder.binding.songLayout.setCustomClickListener {
-            clickListener(getItem(position))
+            clickListener(getItem(holder.layoutPosition))
         }
     }
 }
