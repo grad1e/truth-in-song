@@ -4,13 +4,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.R
 import dev.rtrilia.truthinsong.databinding.ActivityMainBinding
 import dev.rtrilia.truthinsong.util.hide
+import dev.rtrilia.truthinsong.util.setCustomClickListener
 import dev.rtrilia.truthinsong.util.show
 
 @AndroidEntryPoint
@@ -26,13 +27,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupNavigationItems()
         setupEdgeToEdge()
-        binding.fabSearch.setOnClickListener {
+        binding.fabSearch.setCustomClickListener {
             openSearch()
         }
     }
 
     private fun setupNavigationItems() {
-        navController = findNavController(R.id.nav_host_fragment)
+        //navController = findNavController(R.id.nav_host_fragment)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+
         setSupportActionBar(binding.homeToolbar)
         val appBarConfiguration =
             AppBarConfiguration.Builder(R.id.splashFragment, R.id.homeFragment).build()

@@ -14,7 +14,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.R
 import dev.rtrilia.truthinsong.databinding.FragmentHomeBinding
-import dev.rtrilia.truthinsong.ui.MainActivity
 import dev.rtrilia.truthinsong.ui.english.EnglishListFragment
 import dev.rtrilia.truthinsong.ui.malayalam.MalayalamListFragment
 import dev.rtrilia.truthinsong.ui.responsive.ResponsiveListFragment
@@ -58,7 +57,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        (activity as MainActivity).supportActionBar?.title = "Truth in Song"
         setupViewPager()
     }
 

@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.databinding.FragmentSearchListBinding
+import timber.log.Timber
 
 @AndroidEntryPoint
 class SearchListFragment : DialogFragment() {
@@ -34,6 +35,13 @@ class SearchListFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         openKeyboard()
         setupRecyclerView()
+        setupObservables()
+    }
+
+    private fun setupObservables() {
+        viewModel.searchString.observe(viewLifecycleOwner){
+            Timber.d("Search string: $it")
+        }
     }
 
     private fun openKeyboard() {

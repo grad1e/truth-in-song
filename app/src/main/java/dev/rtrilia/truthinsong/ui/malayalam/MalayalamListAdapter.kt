@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dev.rtrilia.truthinsong.data.models.MalayalamList
 import dev.rtrilia.truthinsong.databinding.ItemMalayalamListBinding
+import dev.rtrilia.truthinsong.util.setCustomClickListener
 
 
 class MalayalamListAdapter(val clickListener: (MalayalamList) -> Unit) :
@@ -31,7 +32,7 @@ class MalayalamListAdapter(val clickListener: (MalayalamList) -> Unit) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val listItem = getItem(position)
         holder.binding.model = listItem
-        holder.binding.songLayout.setOnClickListener {
+        holder.binding.songLayout.setCustomClickListener {
             listItem?.let {
                 clickListener(listItem)
             }
