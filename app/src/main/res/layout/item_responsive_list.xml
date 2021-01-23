@@ -9,6 +9,10 @@
             name="model"
             type="dev.rtrilia.truthinsong.data.models.ResponsiveList" />
 
+        <variable
+            name="clickListener"
+            type="dev.rtrilia.truthinsong.ui.responsive.ResponsiveListAdapter" />
+
     </data>
 
 
@@ -16,7 +20,8 @@
         android:id="@+id/song_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground">
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="@{()->clickListener.onClick.invoke(model)}">
 
         <TextView
             android:id="@+id/tv_page_id"

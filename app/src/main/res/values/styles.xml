@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
@@ -12,12 +12,16 @@
         <item name="colorSurface">@color/surfaceColor</item>
         <item name="colorOnSurface">@color/surfaceTextColor</item>
 
-        <item name="android:navigationBarColor">#41000000</item>
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentNavigation">true</item>
 
         <item name="android:textColor">@color/surfaceTextColor</item>
 
         <item name="tabStyle">@style/Widget.MaterialComponents.TabLayout</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
     <style name="AppTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense" />

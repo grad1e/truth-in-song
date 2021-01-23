@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlinx-serialization'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'com.google.gms.google-services'
@@ -10,11 +11,17 @@ apply plugin: 'dagger.hilt.android.plugin'
 android {
 
     signingConfigs {
+
+        Properties properties = new Properties()
+        if (rootProject.file("local.properties").exists()) {
+            properties.load(rootProject.file("local.properties").newDataInputStream())
+        }
+
         release {
-            storeFile file(RELEASE_STORE_FILE)
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
+            storeFile file(properties.getProperty('RELEASE_STORE_FILE'))
+            storePassword properties.getProperty('RELEASE_STORE_PASSWORD')
+            keyAlias properties.getProperty('RELEASE_KEY_ALIAS')
+            keyPassword properties.getProperty('RELEASE_KEY_PASSWORD')
         }
     }
     compileSdkVersion 30
@@ -28,15 +35,21 @@ android {
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        javaCompileOptions {
+        /*javaCompileOptions {
             annotationProcessorOptions {
                 arguments += [
                         "room.schemaLocation"  : "$projectDir/schemas".toString(),
                         "room.incremental"     : "true",
                         "room.expandProjection": "true"]
             }
-        }
+        }*/
 
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "truth_in_song_${variant.buildType.name}_${defaultConfig.versionName}.apk"
+        }
     }
 
     buildFeatures {
@@ -49,7 +62,6 @@ android {
     }
     buildTypes {
         release {
-            debuggable true
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -68,18 +80,20 @@ kapt {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    // Kotlin Std Library
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    // Testing
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //Kotlin coroutine
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_vesion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_vesion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
 
     //Core KTX
-    implementation 'androidx.core:core-ktx:1.5.0-alpha04'
+    implementation 'androidx.core:core-ktx:1.5.0-beta01'
 
     //Lifecycle - ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
@@ -87,13 +101,13 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
     //AppCompat
-    implementation 'androidx.appcompat:appcompat:1.3.0-alpha02'
+    implementation 'androidx.appcompat:appcompat:1.3.0-beta01'
 
     //Constraint Layout
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     //Material
-    implementation 'com.google.android.material:material:1.3.0-alpha03'
+    implementation 'com.google.android.material:material:1.3.0-rc01'
 
     //Room
     implementation "androidx.room:room-runtime:$room_version"
@@ -115,26 +129,35 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:2.1.2"
 
     //LeakCanary
-    // debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
+    //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
 
     //Fragment KTX
-    implementation 'androidx.fragment:fragment-ktx:1.3.0-beta01'
+    implementation 'androidx.fragment:fragment-ktx:1.3.0-rc01'
 
     // Recyclerview
-    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha06'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-beta01'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-analytics-ktx:17.6.0'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:17.2.2'
+//    implementation platform('com.google.firebase:firebase-bom:26.3.0')
+//    implementation 'com.google.firebase:firebase-analytics-ktx'
+//    implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
     // Hilt - dagger
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_android_version"
-    kapt "androidx.hilt:hilt-compiler:$hilt_android_version"
 
-    // Preference
-    implementation "androidx.preference:preference-ktx:1.1.1"
+    // ViewBinding Delegates
+    implementation 'com.kirich1409.viewbindingpropertydelegate:viewbindingpropertydelegate:1.4.1'
 
+    // Chucker
+    debugImplementation 'com.github.chuckerteam.chucker:library:3.4.0'
+    releaseImplementation 'com.github.chuckerteam.chucker:library-no-op:3.4.0'
+
+    // Retrofit - KotlinX serialization
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
 
 }

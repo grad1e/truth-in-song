@@ -26,16 +26,27 @@ class Repository @Inject constructor(
         engTitleQuery: String?
     ) = songBookDao.getSearchList(songIdQuery, malTitleQuery, engTitleQuery)
 
-    fun setUiModePref(value: Int) = preferences.setUiMode(value)
-    fun getUiModePref() = preferences.getUiMode()
+    fun setUiModePref(value: Int) {
+        preferences.uiMode = value
+    }
 
-    fun setFontSizePref(value: Float) = preferences.setFontSize(value)
-    fun getFontSizePref() = preferences.getFontSize()
+    fun getUiModePref() = preferences.uiMode
 
-    fun setFontSizeSmallPref(value: Float) = preferences.setFontSizeSmall(value)
-    fun getFontSizeSmallPref() = preferences.getFontSizeSmall()
+    fun setFontSizePref(value: Float) {
+        preferences.fontSize = value
+    }
 
-    fun setShuffleMode(value: Int) = preferences.setShuffleMode(value)
-    fun getShuffleMode() = preferences.getShuffleMode()
+    fun getFontSizePref() = preferences.fontSize
 
+    fun setFontSizeSmallPref(value: Float) {
+        preferences.fontSizeSmall = value
+    }
+
+    fun getFontSizeSmallPref() = preferences.fontSizeSmall
+
+    fun setShuffleMode(value: Int) {
+        preferences.shuffleMode = value
+    }
+
+    fun getShuffleMode() = preferences.shuffleMode
 }

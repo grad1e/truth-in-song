@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -33,19 +32,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigationItems() {
-        //navController = findNavController(R.id.nav_host_fragment)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
         setSupportActionBar(binding.homeToolbar)
         val appBarConfiguration =
-            AppBarConfiguration.Builder(R.id.splashFragment, R.id.homeFragment).build()
+            AppBarConfiguration.Builder(R.id.homeFragment).build()
         binding.homeToolbar.setupWithNavController(navController, appBarConfiguration)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.splashFragment -> setViewsGone()
                 R.id.homeFragment -> setViewsVisible()
                 R.id.songFragment -> setViewsVisible()
             }

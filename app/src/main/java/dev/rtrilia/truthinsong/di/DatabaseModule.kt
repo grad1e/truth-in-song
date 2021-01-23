@@ -8,8 +8,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import dev.rtrilia.truthinsong.data.database.SongBookDao
 import dev.rtrilia.truthinsong.data.database.SongDatabase
 import dev.rtrilia.truthinsong.util.SongDatabaseUtil
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
     lateinit var database: SongDatabase

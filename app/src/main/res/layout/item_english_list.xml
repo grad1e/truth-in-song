@@ -9,6 +9,10 @@
             name="model"
             type="dev.rtrilia.truthinsong.data.models.EnglishList" />
 
+        <variable
+            name="clickListener"
+            type="dev.rtrilia.truthinsong.ui.english.EnglishListAdapter" />
+
 
     </data>
 
@@ -17,7 +21,8 @@
         android:id="@+id/song_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground">
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="@{()->clickListener.onClick.invoke(model)}">
 
 
         <TextView

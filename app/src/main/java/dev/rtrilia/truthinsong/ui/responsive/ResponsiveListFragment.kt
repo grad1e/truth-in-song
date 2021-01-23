@@ -22,7 +22,11 @@ class ResponsiveListFragment : Fragment() {
     private lateinit var binding: FragmentResponsiveListBinding
     private val viewModel by viewModels<ResponsiveListViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentResponsiveListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -36,12 +40,22 @@ class ResponsiveListFragment : Fragment() {
     private fun setupRecyclerView() {
         val adapter = ResponsiveListAdapter {
             it.id?.let { id ->
-                findNavController().navigate(ResponsiveListFragmentDirections.actionGlobalDetailFragment(id))
+                findNavController().navigate(
+                    ResponsiveListFragmentDirections.actionGlobalDetailFragment(
+                        id
+                    )
+                )
             }
         }
         binding.rvScripturalList.adapter = adapter
-        adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        binding.rvScripturalList.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+        adapter.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        binding.rvScripturalList.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                RecyclerView.VERTICAL
+            )
+        )
         binding.rvScripturalList.setHasFixedSize(true)
 
         viewModel.getResponsiveList().observe(viewLifecycleOwner, Observer {

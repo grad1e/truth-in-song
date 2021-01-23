@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dev.rtrilia.truthinsong.data.models.ResponsiveList
 import dev.rtrilia.truthinsong.databinding.ItemResponsiveListBinding
-import dev.rtrilia.truthinsong.util.setCustomClickListener
 
-class ResponsiveListAdapter(private val clickListener: (ResponsiveList) -> Unit) :
+class ResponsiveListAdapter(val onClick: (ResponsiveList) -> Unit) :
     PagedListAdapter<ResponsiveList, ResponsiveListAdapter.ViewHolder>(ResponsiveListDiffCallback) {
 
     companion object ResponsiveListDiffCallback : DiffUtil.ItemCallback<ResponsiveList>() {
@@ -25,17 +24,18 @@ class ResponsiveListAdapter(private val clickListener: (ResponsiveList) -> Unit)
     class ViewHolder(val binding: ItemResponsiveListBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemResponsiveListBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(
+            ItemResponsiveListBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val listItem = getItem(position)
-        holder.binding.model = listItem
-        holder.binding.songLayout.setCustomClickListener {
-            listItem?.let {
-                clickListener(listItem)
-            }
-        }
+        holder.binding.model = getItem(holder.layoutPosition)
+        holder.binding.clickListener = this
     }
 
 }

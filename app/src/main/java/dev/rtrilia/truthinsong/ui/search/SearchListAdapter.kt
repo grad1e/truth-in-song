@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.rtrilia.truthinsong.data.models.Song
 import dev.rtrilia.truthinsong.databinding.ItemFragmentSearchBinding
-import dev.rtrilia.truthinsong.util.setCustomClickListener
 
-class SearchListAdapter(private val clickListener: (Song) -> Unit) : ListAdapter<Song, SearchListAdapter.ViewHolder>(SearchListDiffUtil) {
+class SearchListAdapter(val onClick: (Song) -> Unit) :
+    ListAdapter<Song, SearchListAdapter.ViewHolder>(SearchListDiffUtil) {
 
     object SearchListDiffUtil : DiffUtil.ItemCallback<Song>() {
         override fun areItemsTheSame(oldItem: Song, newItem: Song): Boolean {
@@ -24,13 +24,17 @@ class SearchListAdapter(private val clickListener: (Song) -> Unit) : ListAdapter
     class ViewHolder(val binding: ItemFragmentSearchBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemFragmentSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(
+            ItemFragmentSearchBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.model = getItem(position)
-        holder.binding.songLayout.setCustomClickListener {
-            clickListener(getItem(holder.layoutPosition))
-        }
+        holder.binding.model = getItem(holder.layoutPosition)
+        holder.binding.clickListener = this
     }
 }

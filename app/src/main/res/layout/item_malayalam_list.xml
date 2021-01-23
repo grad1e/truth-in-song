@@ -9,13 +9,18 @@
             name="model"
             type="dev.rtrilia.truthinsong.data.models.MalayalamList" />
 
+        <variable
+            name="clickListener"
+            type="dev.rtrilia.truthinsong.ui.malayalam.MalayalamListAdapter" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/song_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground">
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="@{()->clickListener.onClick.invoke(model)}">
 
         <TextView
             android:id="@+id/tv_song_id"

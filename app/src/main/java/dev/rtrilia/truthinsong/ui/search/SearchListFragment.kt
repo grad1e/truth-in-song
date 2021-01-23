@@ -39,7 +39,7 @@ class SearchListFragment : DialogFragment() {
     }
 
     private fun setupObservables() {
-        viewModel.searchString.observe(viewLifecycleOwner){
+        viewModel.searchString.observe(viewLifecycleOwner) {
             Timber.d("Search string: $it")
         }
     }

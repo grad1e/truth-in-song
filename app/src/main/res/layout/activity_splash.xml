@@ -7,9 +7,9 @@
         android:id="@+id/splash_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="dev.rtrilia.truthinsong.ui.splash.SplashFragment">
+        tools:context="dev.rtrilia.truthinsong.ui.splash.SplashActivity">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,9 +22,8 @@
             app:layout_constraintVertical_bias="0.30"
             app:srcCompat="@drawable/logo" />
 
-        <com.google.android.material.progressindicator.ProgressIndicator
+        <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/progressBar"
-            style="@style/Widget.MaterialComponents.ProgressIndicator.Circular.Determinate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:max="1624"

@@ -9,16 +9,20 @@
             name="model"
             type="dev.rtrilia.truthinsong.data.models.Song" />
 
+        <variable
+            name="clickListener"
+            type="dev.rtrilia.truthinsong.ui.search.SearchListAdapter" />
+
 
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/song_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/song_layout"
-        android:background="?android:attr/selectableItemBackground">
-
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="@{()->clickListener.onClick.invoke(model)}">
 
         <TextView
             android:id="@+id/tv_song_id"
@@ -38,11 +42,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:textSize="16sp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@{model.mal_title ?? model.eng_title}"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_song_id"

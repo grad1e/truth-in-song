@@ -1,13 +1,14 @@
 package dev.rtrilia.truthinsong.ui.search
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.rtrilia.truthinsong.repository.Repository
-import timber.log.Timber
+import javax.inject.Inject
 
-class SearchListViewModel @ViewModelInject constructor(private val repository: Repository) :
+@HiltViewModel
+class SearchListViewModel @Inject constructor(private val repository: Repository) :
     ViewModel() {
 
     val searchString = MutableLiveData<String>()
