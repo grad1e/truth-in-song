@@ -26,11 +26,11 @@
             app:argType="string" />
     </fragment>
     <dialog
-        android:id="@+id/searchFragment"
+        android:id="@+id/searchDialog"
         android:name="dev.rtrilia.truthinsong.ui.search.SearchListFragment"
-        tools:layout="@layout/fragment_search_list">
+        tools:layout="@layout/dialog_search_list">
         <action
-            android:id="@+id/action_searchFragment_to_detailFragment"
+            android:id="@+id/action_searchDialog_to_songFragment"
             app:destination="@id/songFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
@@ -40,15 +40,14 @@
             app:popUpToInclusive="true" />
     </dialog>
     <action
-        android:id="@+id/action_global_searchFragment"
-        app:destination="@id/searchFragment" />
+        android:id="@+id/action_global_searchDialog"
+        app:destination="@id/searchDialog" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="dev.rtrilia.truthinsong.ui.home.HomeFragment"
-        android:label="Truth in Song"
         tools:layout="@layout/fragment_home" />
     <action
-        android:id="@+id/action_global_detailFragment"
+        android:id="@+id/action_global_songFragment"
         app:destination="@id/songFragment"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
@@ -59,7 +58,6 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="dev.rtrilia.truthinsong.ui.about.AboutFragment"
-        android:label="About"
         tools:layout="@layout/fragment_about" />
     <action
         android:id="@+id/action_global_aboutFragment"

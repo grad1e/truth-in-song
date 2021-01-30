@@ -2,80 +2,76 @@ package dev.rtrilia.truthinsong.ui.song
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.View
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.rtrilia.truthinsong.R
 import dev.rtrilia.truthinsong.databinding.FragmentSongBinding
-import dev.rtrilia.truthinsong.ui.MainActivity
 import dev.rtrilia.truthinsong.ui.home.HomeFragmentDirections
 import dev.rtrilia.truthinsong.util.Constants
 import dev.rtrilia.truthinsong.util.ShuffleMode
 import kotlin.random.Random
 
 @AndroidEntryPoint
-class SongFragment : Fragment() {
+class SongFragment : Fragment(R.layout.fragment_song) {
 
-    private lateinit var binding: FragmentSongBinding
+    private val binding by viewBinding(FragmentSongBinding::bind)
     private val viewModel by viewModels<SongViewModel>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSongBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        return binding.root
-    }
+    private val args by navArgs<SongFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
-        val args by navArgs<SongFragmentArgs>()
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+        setupToolbar()
         viewModel.getSong(args.id)
         setSongData()
         setFontSize()
     }
 
-    private fun setSongData() {
-        viewModel.songId.observe(viewLifecycleOwner, Observer {
-            it?.let { songId ->
-                (activity as MainActivity).supportActionBar?.title = songId
-            }
-        })
+    private fun setupToolbar() {
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
-        viewModel.songAuthor.observe(viewLifecycleOwner, Observer {
-            it?.let { author ->
-                if (author.isBlank()) {
-                    binding.songAuthor.visibility = View.GONE
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_song_font_size_decrease -> {
+                    decreaseFontSize()
+                    true
                 }
+                R.id.menu_song_font_size_increase -> {
+                    increaseFontSize()
+                    true
+                }
+                R.id.menu_song_share -> {
+                    onShareClicked()
+                    true
+                }
+                R.id.menu_song_shuffle -> {
+                    onShuffleClicked()
+                    true
+                }
+                else -> false
             }
-        })
-
-
-        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-    }
-
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_fragment_song, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.font_size_decrease -> decreaseFontSize()
-            R.id.font_size_increase -> increaseFontSize()
-            R.id.share -> onShareClicked()
-            R.id.shuffle -> onShuffleClicked()
         }
-        return super.onOptionsItemSelected(item)
+
+    }
+
+    private fun setSongData() {
+        viewModel.songAuthor.observe(viewLifecycleOwner) {
+            if (it.isNullOrBlank()) {
+                binding.songAuthor.visibility = View.GONE
+            }
+        }
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 
     private fun increaseFontSize() {
@@ -125,7 +121,7 @@ class SongFragment : Fragment() {
             )
             else -> 0
         }
-        findNavController().navigate(HomeFragmentDirections.actionGlobalDetailFragment(id.toString()))
+        findNavController().navigate(HomeFragmentDirections.actionGlobalSongFragment(id.toString()))
     }
 
     private fun setFontSize() {

@@ -17,6 +17,22 @@
         android:layout_height="match_parent"
         android:keepScreenOn="true">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:topInsetPadding="@{true}">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/AppToolbarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/menu_song"
+                app:title="@{viewModel.songId}"
+                tools:title="2" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.core.widget.NestedScrollView
             android:id="@+id/song_scrollview"
             android:layout_width="match_parent"
@@ -24,7 +40,8 @@
             android:clipToPadding="false"
             android:fadeScrollbars="true"
             android:scrollbars="vertical"
-            app:bottomInsetPadding="@{true}">
+            app:bottomInsetPadding="@{true}"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,12 +49,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
                 <TextView
                     android:id="@+id/song_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:fontFamily="@font/lato"
                     android:text="@{viewModel.songId}"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/song_title"
@@ -52,9 +69,9 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/lato_bold"
                     android:text="@{viewModel.songMalTitle??viewModel.songEngTitle}"
                     android:textSize="16sp"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/song_number"
                     app:layout_constraintTop_toTopOf="parent"
@@ -84,6 +101,7 @@
                             android:id="@+id/song_content"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato"
                             android:lineSpacingExtra="8sp"
                             android:text="@{viewModel.songContent}"
                             android:textSize="16sp"
@@ -99,6 +117,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
+                            android:fontFamily="@font/lato_italic"
                             android:text="@{viewModel.songAuthor}"
                             android:textSize="12sp"
                             android:textStyle="italic"

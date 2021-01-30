@@ -35,7 +35,7 @@ class MalayalamListAdapter(val onClick: (MalayalamList) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.model = getItem(holder.layoutPosition)
+        holder.binding.model = getItem(holder.bindingAdapterPosition)
         holder.binding.clickListener = this
     }
 

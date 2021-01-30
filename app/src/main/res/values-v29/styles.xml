@@ -14,6 +14,8 @@
 
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
         <item name="android:textColor">@color/surfaceTextColor</item>
 
@@ -21,7 +23,16 @@
     </style>
 
     <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="AppToolbarStyle" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
+        <item name="android:theme">@style/AppToolbarTheme</item>
+    </style>
+
+    <style name="AppToolbarTheme" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="fontFamily">@font/lato</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="AppTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense" />

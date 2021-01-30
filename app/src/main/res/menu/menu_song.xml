@@ -4,27 +4,27 @@
 
 
     <item
-        android:id="@+id/share"
+        android:id="@+id/menu_song_share"
         android:icon="@drawable/ic_share"
         android:title="Share"
         android:visible="true"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/shuffle"
+        android:id="@+id/menu_song_shuffle"
         android:icon="@drawable/ic_shuffle"
         android:title="Shuffle"
         android:visible="true"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/font_size_decrease"
+        android:id="@+id/menu_song_font_size_decrease"
         android:icon="@drawable/ic_decrease"
         android:title="Decrease Font Size"
         android:visible="true"
         app:showAsAction="never" />
     <item
-        android:id="@+id/font_size_increase"
+        android:id="@+id/menu_song_font_size_increase"
         android:icon="@drawable/ic_increase"
         android:title="Increase Font Size"
         android:visible="true"

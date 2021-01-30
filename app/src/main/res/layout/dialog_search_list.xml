@@ -27,6 +27,7 @@
                 android:id="@+id/til_et_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/lato"
                 android:singleLine="true"
                 android:text="@={viewModel.searchString}" />
 

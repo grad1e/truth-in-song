@@ -10,30 +10,24 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.rtrilia.truthinsong.R
+import dev.rtrilia.truthinsong.databinding.FragmentMalayalamListBinding
 import dev.rtrilia.truthinsong.databinding.FragmentResponsiveListBinding
 
 /**
  * A simple [Fragment] subclass.
  */
 @AndroidEntryPoint
-class ResponsiveListFragment : Fragment() {
+class ResponsiveListFragment : Fragment(R.layout.fragment_responsive_list) {
 
-    private lateinit var binding: FragmentResponsiveListBinding
+    private val binding by viewBinding(FragmentResponsiveListBinding::bind)
     private val viewModel by viewModels<ResponsiveListViewModel>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentResponsiveListBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
         setupRecyclerView()
     }
 
@@ -41,7 +35,7 @@ class ResponsiveListFragment : Fragment() {
         val adapter = ResponsiveListAdapter {
             it.id?.let { id ->
                 findNavController().navigate(
-                    ResponsiveListFragmentDirections.actionGlobalDetailFragment(
+                    ResponsiveListFragmentDirections.actionGlobalSongFragment(
                         id
                     )
                 )

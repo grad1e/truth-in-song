@@ -13,7 +13,9 @@
         <item name="colorOnSurface">@color/surfaceTextColor</item>
 
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
         <item name="android:textColor">@color/surfaceTextColor</item>
 
@@ -22,6 +24,16 @@
 
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
+
+    <style name="AppToolbarStyle" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
+        <item name="navigationIconTint">@android:color/white</item>
+        <item name="android:theme">@style/AppToolbarTheme</item>
+    </style>
+
+    <style name="AppToolbarTheme">
+        <item name="fontFamily">@font/lato</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="AppTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense" />

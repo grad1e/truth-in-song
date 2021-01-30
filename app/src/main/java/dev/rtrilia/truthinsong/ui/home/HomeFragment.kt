@@ -1,14 +1,17 @@
 package dev.rtrilia.truthinsong.ui.home
 
 import android.os.Bundle
-import android.view.*
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +26,7 @@ import dev.rtrilia.truthinsong.util.UiMode
 import kotlin.random.Random
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     companion object {
 
@@ -41,23 +44,44 @@ class HomeFragment : Fragment() {
 
     }
 
-    private lateinit var binding: FragmentHomeBinding
+    private val binding by viewBinding(FragmentHomeBinding::bind)
     private val viewModel by viewModels<HomeViewModel>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+        setupToolbar()
         setupViewPager()
+    }
+
+    private fun setupToolbar() {
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_home_theme -> {
+                    openThemePickerDialog()
+                    true
+                }
+                R.id.menu_home_about -> {
+                    findNavController().navigate(HomeFragmentDirections.actionGlobalAboutFragment())
+                    true
+                }
+                R.id.menu_home_shuffle -> {
+                    onShuffleClicked()
+                    true
+                }
+                R.id.menu_home_shuffle_mode -> {
+                    openShuffleModePickerDialog()
+                    true
+                }
+                else -> false
+            }
+        }
+
     }
 
     private fun setupViewPager() {
@@ -81,21 +105,6 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         binding.homeViewpager.adapter = null
         super.onDestroyView()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_home, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.theme -> openThemePickerDialog()
-            R.id.about -> findNavController().navigate(HomeFragmentDirections.actionGlobalAboutFragment())
-            R.id.shuffle -> onShuffleClicked()
-            R.id.shuffle_mode -> openShuffleModePickerDialog()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun openThemePickerDialog() {
@@ -169,7 +178,7 @@ class HomeFragment : Fragment() {
             )
             else -> 0
         }
-        findNavController().navigate(HomeFragmentDirections.actionGlobalDetailFragment(id.toString()))
+        findNavController().navigate(HomeFragmentDirections.actionGlobalSongFragment(id.toString()))
     }
 
 

@@ -30,7 +30,7 @@ class EnglishListAdapter(val onClick: (EnglishList) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.model = getItem(holder.layoutPosition)
+        holder.binding.model = getItem(holder.bindingAdapterPosition)
         holder.binding.clickListener = this
     }
 

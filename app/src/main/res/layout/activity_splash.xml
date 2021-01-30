@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="dev.rtrilia.truthinsong.ui.splash.SplashViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/splash_layout"
         android:layout_width="match_parent"
@@ -36,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Version 1.4"
+            android:text="@{viewModel.versionName}"
             android:textColor="@android:color/darker_gray"
             app:bottomInsetMargin="@{true}"
             app:layout_constraintBottom_toBottomOf="parent"

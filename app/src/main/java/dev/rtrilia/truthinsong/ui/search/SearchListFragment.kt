@@ -2,7 +2,6 @@ package dev.rtrilia.truthinsong.ui.search
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -10,29 +9,22 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dev.rtrilia.truthinsong.databinding.FragmentSearchListBinding
+import dev.rtrilia.truthinsong.R
+import dev.rtrilia.truthinsong.databinding.DialogSearchListBinding
 import timber.log.Timber
 
 @AndroidEntryPoint
-class SearchListFragment : DialogFragment() {
+class SearchListFragment : DialogFragment(R.layout.dialog_search_list) {
 
-    private lateinit var binding: FragmentSearchListBinding
+    private val binding by viewBinding(DialogSearchListBinding::bind)
     private val viewModel by viewModels<SearchListViewModel>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSearchListBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
         openKeyboard()
         setupRecyclerView()
         setupObservables()
@@ -58,7 +50,7 @@ class SearchListFragment : DialogFragment() {
         val adapter = SearchListAdapter {
             it.id?.let { id ->
                 findNavController().navigate(
-                    SearchListFragmentDirections.actionSearchFragmentToDetailFragment(
+                    SearchListFragmentDirections.actionSearchDialogToSongFragment(
                         id
                     )
                 )

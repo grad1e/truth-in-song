@@ -29,9 +29,21 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+        setVersionName()
         setupAppTheme()
         navigateToHome()
         checkDataInDb()
+    }
+
+    private fun setVersionName() {
+        try {
+            val packageInfo = this.packageManager.getPackageInfo(packageName, 0)
+            val versionName = packageInfo.versionName
+            viewModel.setVersionName("v $versionName")
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
     }
 
     private fun checkDataInDb() {
@@ -45,6 +57,7 @@ class SplashActivity : AppCompatActivity() {
 
 
     private fun setupAppTheme() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         when (viewModel.getUiMode()) {
             UiMode.SYSTEM_DEFAULT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             UiMode.DARK_MODE -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -53,7 +66,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun navigateToHome() {
-        viewModel.onDbRowsCheckSuccess.asLiveData().observeOnce(this){
+        viewModel.onDbRowsCheckSuccess.asLiveData().observeOnce(this) {
             lifecycleScope.launch {
                 delay(1000)
                 Intent(this@SplashActivity, MainActivity::class.java).apply {

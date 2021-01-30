@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/shuffle"
+        android:id="@+id/menu_home_shuffle"
         android:icon="@drawable/ic_shuffle"
         android:title="Shuffle"
         android:visible="true"
         app:showAsAction="always" />
     <item
-        android:id="@+id/theme"
+        android:id="@+id/menu_home_theme"
         android:title="Choose theme"
         android:visible="true"
         app:showAsAction="never" />
     <item
-        android:id="@+id/shuffle_mode"
+        android:id="@+id/menu_home_shuffle_mode"
         android:title="Choose shuffle mode"
         android:visible="true"
         app:showAsAction="never" />
     <item
-        android:id="@+id/about"
+        android:id="@+id/menu_home_about"
         android:title="About"
         android:visible="false"
         app:showAsAction="never" />
