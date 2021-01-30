@@ -20,7 +20,7 @@ class SplashViewModel @Inject constructor(private val repository: Repository) : 
 
     fun getDbRows() = repository.getDbRows()
 
-    fun getUiMode() = repository.getUiModePref()
+    fun getUiMode() = repository.uiMode
 
     fun setDbRowsCheckSuccess() {
         _onDbRowsCheckSuccess.tryEmit(true)

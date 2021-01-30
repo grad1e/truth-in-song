@@ -79,8 +79,8 @@ class SongFragment : Fragment(R.layout.fragment_song) {
         binding.songTitle.setTextSize(0, binding.songTitle.textSize + 4.0f)
         binding.songContent.setTextSize(0, binding.songContent.textSize + 4.0f)
         binding.songAuthor.setTextSize(0, binding.songAuthor.textSize + 4.0f)
-        viewModel.setFontSizePref(binding.songNumber.textSize)
-        viewModel.setFontSizeSmallPref(binding.songAuthor.textSize)
+        viewModel.fontSize = binding.songNumber.textSize
+        viewModel.fontSize = binding.songAuthor.textSize
     }
 
     private fun decreaseFontSize() {
@@ -88,8 +88,8 @@ class SongFragment : Fragment(R.layout.fragment_song) {
         binding.songTitle.setTextSize(0, binding.songTitle.textSize - 4.0f)
         binding.songContent.setTextSize(0, binding.songContent.textSize - 4.0f)
         binding.songAuthor.setTextSize(0, binding.songAuthor.textSize - 4.0f)
-        viewModel.setFontSizePref(binding.songNumber.textSize)
-        viewModel.setFontSizeSmallPref(binding.songAuthor.textSize)
+        viewModel.fontSizeSmall = binding.songNumber.textSize
+        viewModel.fontSizeSmall = binding.songAuthor.textSize
     }
 
     private fun onShareClicked() {
@@ -106,7 +106,7 @@ class SongFragment : Fragment(R.layout.fragment_song) {
     }
 
     private fun onShuffleClicked() {
-        val id = when (viewModel.getShuffleMode()) {
+        val id = when (viewModel.shuffleMode) {
             ShuffleMode.MALAYALAM_ONLY -> Random.nextInt(
                 Constants.MALAYALAM_ID_START,
                 Constants.MALAYALAM_ID_END
@@ -125,13 +125,13 @@ class SongFragment : Fragment(R.layout.fragment_song) {
     }
 
     private fun setFontSize() {
-        if (viewModel.getFontSizePref() != 0f) {
-            binding.songNumber.setTextSize(0, viewModel.getFontSizePref())
-            binding.songTitle.setTextSize(0, viewModel.getFontSizePref())
-            binding.songContent.setTextSize(0, viewModel.getFontSizePref())
+        if (viewModel.fontSize != 0f) {
+            binding.songNumber.setTextSize(0, viewModel.fontSize)
+            binding.songTitle.setTextSize(0, viewModel.fontSize)
+            binding.songContent.setTextSize(0, viewModel.fontSize)
         }
-        if (viewModel.getFontSizeSmallPref() != 0f) {
-            binding.songAuthor.setTextSize(0, viewModel.getFontSizeSmallPref())
+        if (viewModel.fontSizeSmall != 0f) {
+            binding.songAuthor.setTextSize(0, viewModel.fontSizeSmall)
         }
     }
 

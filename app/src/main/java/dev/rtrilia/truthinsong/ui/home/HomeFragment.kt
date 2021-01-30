@@ -109,24 +109,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun openThemePickerDialog() {
         val styles = arrayOf("Light", "Dark", "System default")
-        val checkedItem = viewModel.getUiMode()
+        val checkedItem = viewModel.uiMode
         MaterialAlertDialogBuilder(requireContext()).apply {
             setTitle("Choose Theme")
             setSingleChoiceItems(styles, checkedItem) { dialog, uiMode ->
                 when (uiMode) {
                     UiMode.LIGHT_MODE -> {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                        viewModel.setUiMode(UiMode.LIGHT_MODE)
+                        viewModel.uiMode = UiMode.LIGHT_MODE
                         dialog.cancel()
                     }
                     UiMode.DARK_MODE -> {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                        viewModel.setUiMode(UiMode.DARK_MODE)
+                        viewModel.uiMode = UiMode.DARK_MODE
                         dialog.cancel()
                     }
                     UiMode.SYSTEM_DEFAULT -> {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                        viewModel.setUiMode(UiMode.SYSTEM_DEFAULT)
+                        viewModel.uiMode = UiMode.SYSTEM_DEFAULT
                         dialog.cancel()
                     }
                 }
@@ -138,21 +138,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun openShuffleModePickerDialog() {
         val shuffleModes = arrayOf("Malayalam Only", "English Only", "Both Malayalam and English")
-        val checkedItem = viewModel.getShuffleMode()
+        val checkedItem = viewModel.shuffleMode
         MaterialAlertDialogBuilder(requireContext()).apply {
             setTitle("Choose Shuffle Mode")
             setSingleChoiceItems(shuffleModes, checkedItem) { dialog, shuffleMode ->
                 when (shuffleMode) {
                     ShuffleMode.MALAYALAM_ONLY -> {
-                        viewModel.setShuffleMode(ShuffleMode.MALAYALAM_ONLY)
+                        viewModel.shuffleMode = ShuffleMode.MALAYALAM_ONLY
                         dialog.cancel()
                     }
                     ShuffleMode.ENGLISH_ONLY -> {
-                        viewModel.setShuffleMode(ShuffleMode.ENGLISH_ONLY)
+                        viewModel.shuffleMode = ShuffleMode.ENGLISH_ONLY
                         dialog.cancel()
                     }
                     ShuffleMode.BOTH_MALAYALAM_ENGLISH -> {
-                        viewModel.setShuffleMode(ShuffleMode.BOTH_MALAYALAM_ENGLISH)
+                        viewModel.shuffleMode = ShuffleMode.BOTH_MALAYALAM_ENGLISH
                         dialog.cancel()
                     }
                 }
@@ -163,7 +163,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun onShuffleClicked() {
-        val id = when (viewModel.getShuffleMode()) {
+        val id = when (viewModel.shuffleMode) {
             ShuffleMode.MALAYALAM_ONLY -> Random.nextInt(
                 Constants.MALAYALAM_ID_START,
                 Constants.MALAYALAM_ID_END

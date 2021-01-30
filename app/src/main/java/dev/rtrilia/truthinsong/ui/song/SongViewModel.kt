@@ -53,14 +53,23 @@ class SongViewModel @Inject constructor(val repository: Repository) : ViewModel(
         }
     }
 
-    fun setFontSizePref(value: Float) = repository.setFontSizePref(value)
-    fun getFontSizePref(): Float = repository.getFontSizePref()
+    var fontSize
+        get() = repository.fontSize
+        set(value) {
+            repository.fontSize = value
+        }
 
-    fun setFontSizeSmallPref(value: Float) = repository.setFontSizeSmallPref(value)
-    fun getFontSizeSmallPref(): Float = repository.getFontSizeSmallPref()
+    var fontSizeSmall
+        get() = repository.fontSizeSmall
+        set(value) {
+            repository.fontSizeSmall = value
+        }
 
-    fun getShuffleMode() = repository.getShuffleMode()
-
-
+    var shuffleMode
+        get() = repository.shuffleMode
+        set(value) {
+            repository.shuffleMode = value
+        }
+    
 }
 
